@@ -541,9 +541,9 @@ document.addEventListener('DOMContentLoaded', () => {
             toast: '🌹 Switched to Crimson Rose Theme (Ruby & Blush)!'
         },
         dark: {
-            name: 'Dark Mode',
+            name: 'Pratik Mode',
             currentIcon: '🌙',
-            toast: '🌙 Switched to Dark Mode (Obsidian & Gold)!'
+            toast: '🌙 Switched to Pratik Mode (Dark & Creamy)!'
         }
     };
 
