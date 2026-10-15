@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SSBT College of Engineering & Technology</title>
+    <meta name="description" content="SSBT College of Engineering & Technology, Bambhori, Jalgaon - Student Mobile Portal for Courses, Events, Calendar, Profile, and Help.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="mobile-frame">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <span class="status-time" id="statusTime">12:36</span>
+            <div class="status-icons">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+            </div>
+        </div>
+
+        <!-- Top App Bar -->
+        <header class="app-bar" id="appBar">
+            <button class="icon-btn hamburger" id="menuBtn" aria-label="Menu">
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+                <div class="hamburger-line"></div>
+            </button>
+            <div class="app-bar-center" id="appBarTitleArea">
+                <img src="logo.jpg" alt="SSBT Logo" class="app-logo" id="appLogo">
+                <div class="app-title">
+                    <span class="title-main">SSBT COET</span>
+                    <span class="title-sub">Bambhori, Jalgaon</span>
+                </div>
+            </div>
+            <div class="app-bar-actions" style="display: flex; align-items: center; gap: 6px;">
+                <button class="icon-btn theme-switch-btn" id="themeSwitchQuickBtn" title="Toggle Theme (Default / College Theme)" aria-label="Toggle Theme">
+                    🏛️
+                </button>
+                <button class="icon-btn notification-btn" id="notifBtn" aria-label="Notifications">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notif-badge">3</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Side Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+        <nav class="side-menu" id="sideMenu">
+            <div class="side-menu-header">
+                <img src="logo.jpg" alt="SSBT Logo" class="side-logo">
+                <h2>SSBT COET</h2>
+                <p>Shram Sadhana Bombay Trust's<br>College of Engineering & Technology</p>
+            </div>
+            
+            <!-- Theme Selection Switcher Box -->
+            <div class="theme-switcher-box">
+                <span class="theme-switcher-title">🎨 Active Color Theme</span>
+                <div class="theme-toggle-group">
+                    <button class="theme-btn active" data-theme-val="default">
+                        <span class="theme-swatch sapphire-amber"></span>
+                        <div class="theme-btn-text">
+                            <strong>Navy & Amber</strong>
+                            <small>Modern Sapphire</small>
+                        </div>
+                    </button>
+                    <button class="theme-btn" data-theme-val="college">
+                        <span class="theme-swatch college-olive"></span>
+                        <div class="theme-btn-text">
+                            <strong>College Theme</strong>
+                            <small>Olive & Gold</small>
+                        </div>
+                    </button>
+                    <button class="theme-btn" data-theme-val="rose">
+                        <span class="theme-swatch crimson-rose"></span>
+                        <div class="theme-btn-text">
+                            <strong>Crimson Rose</strong>
+                            <small>Ruby & Blush</small>
+                        </div>
+                    </button>
+                    <button class="theme-btn" data-theme-val="dark">
+                        <span class="theme-swatch dark-mode"></span>
+                        <div class="theme-btn-text">
+                            <strong>Dark Mode</strong>
+                            <small>Obsidian & Gold</small>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <ul class="side-menu-list">
+                <li class="active" data-nav="home"><span class="menu-icon">🏠</span> Home</li>
+                <li data-nav="courses"><span class="menu-icon">📚</span> Courses</li>
+                <li data-nav="events"><span class="menu-icon">🎉</span> Events</li>
+                <li data-nav="calendar"><span class="menu-icon">📅</span> Academic Calendar</li>
+                <li data-nav="profile"><span class="menu-icon">👤</span> My Profile</li>
+                <li data-nav="help"><span class="menu-icon">❓</span> Help & Support</li>
+                <li data-action="notices"><span class="menu-icon">📢</span> Notices & Circulars</li>
+                <li data-action="admissions"><span class="menu-icon">📝</span> Admissions 2026</li>
+                <li data-action="settings"><span class="menu-icon">⚙️</span> Settings</li>
+                <li data-action="logout"><span class="menu-icon">🚪</span> Logout</li>
+            </ul>
+        </nav>
+
+        <!-- Notification Panel -->
+        <div class="notif-panel" id="notifPanel">
+            <div class="notif-header">
+                <h3>Notifications</h3>
+                <button class="notif-close" id="notifClose">&times;</button>
+            </div>
+            <div class="notif-list">
+                <div class="notif-item unread">
+                    <div class="notif-dot"></div>
+                    <div class="notif-content">
+                        <strong>Exam Schedule Released</strong>
+                        <p>Winter semester exams start from Nov 15, 2026</p>
+                        <span class="notif-time">2 hours ago</span>
+                    </div>
+                </div>
+                <div class="notif-item unread">
+                    <div class="notif-dot"></div>
+                    <div class="notif-content">
+                        <strong>Fee Payment Reminder</strong>
+                        <p>Last date for college term fee is Oct 30, 2026</p>
+                        <span class="notif-time">5 hours ago</span>
+                    </div>
+                </div>
+                <div class="notif-item unread">
+                    <div class="notif-dot"></div>
+                    <div class="notif-content">
+                        <strong>Milestone 2026 Hackathon</strong>
+                        <p>Registrations now open for inter-college hackathon</p>
+                        <span class="notif-time">1 day ago</span>
+                    </div>
+                </div>
+                <div class="notif-item">
+                    <div class="notif-content">
+                        <strong>Central Library Notice</strong>
+                        <p>New IEEE research journals added to digital portal</p>
+                        <span class="notif-time">3 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content (Scrollable Container) -->
+        <main class="main-content" id="mainContent">
+
+            <!-- ================= VIEW 1: HOME / DASHBOARD ================= -->
+            <div class="app-view active" id="viewHome">
+                <!-- Welcome Card -->
+                <section class="welcome-card">
+                    <div class="welcome-bg-pattern"></div>
+                    <div class="welcome-content">
+                        <div class="welcome-text">
+                            <span class="greeting" id="greeting">Good Afternoon</span>
+                            <h1 class="student-name">Piyush Patil</h1>
+                            <p class="welcome-msg">B.Tech Computer Engg • TY (Sem VI)</p>
+                        </div>
+                        <div class="welcome-avatar" id="welcomeAvatarBtn" title="View Profile">
+                            <div class="avatar-circle">
+                                <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-stats">
+                        <div class="stat-item" id="statAttendance">
+                            <span class="stat-num">85%</span>
+                            <span class="stat-label">Attendance</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item" id="statGpa">
+                            <span class="stat-num">8.65</span>
+                            <span class="stat-label">CGPA</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item" id="statCredits">
+                            <span class="stat-num">124</span>
+                            <span class="stat-label">Credits</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Actions Dashboard -->
+                <section class="dashboard-section">
+                    <h2 class="section-title">
+                        <span class="title-accent"></span>
+                        Quick Access
+                    </h2>
+                    <div class="dashboard-grid">
+                        <div class="dash-card" data-action="modal-attendance" style="--delay: 0">
+                            <div class="dash-icon attendance-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+                            </div>
+                            <span class="dash-label">Attendance</span>
+                            <span class="dash-meta">85% Present</span>
+                        </div>
+                        <div class="dash-card" data-action="modal-timetable" style="--delay: 1">
+                            <div class="dash-icon timetable-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                            <span class="dash-label">Timetable</span>
+                            <span class="dash-meta">4 Classes Today</span>
+                        </div>
+                        <div class="dash-card" data-action="modal-results" style="--delay: 2">
+                            <div class="dash-icon results-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                            </div>
+                            <span class="dash-label">Results</span>
+                            <span class="dash-meta">Sem V: A+</span>
+                        </div>
+                        <div class="dash-card" data-action="modal-fees" style="--delay: 3">
+                            <div class="dash-icon fees-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <span class="dash-label">Fees</span>
+                            <span class="dash-meta">₹12,500 Due</span>
+                        </div>
+                        <div class="dash-card" data-action="modal-library" style="--delay: 4">
+                            <div class="dash-icon library-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                            </div>
+                            <span class="dash-label">Library</span>
+                            <span class="dash-meta">2 Books Issued</span>
+                        </div>
+                        <div class="dash-card" data-action="modal-notices" style="--delay: 5">
+                            <div class="dash-icon notices-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <span class="dash-label">Notices</span>
+                            <span class="dash-meta">3 New Updates</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Upcoming Events Carousel -->
+                <section class="events-section">
+                    <div class="section-header-flex">
+                        <h2 class="section-title">
+                            <span class="title-accent"></span>
+                            Upcoming Events
+                        </h2>
+                        <button class="see-all-btn" id="seeAllEventsBtn">See All &rarr;</button>
+                    </div>
+                    <div class="events-scroll">
+                        <div class="event-card" data-event="udaan">
+                            <div class="event-date">
+                                <span class="event-day">20</span>
+                                <span class="event-month">OCT</span>
+                            </div>
+                            <div class="event-info">
+                                <h3>Annual Day "Udaan 2026"</h3>
+                                <p>Cultural mega-event & award distribution</p>
+                                <span class="event-location">📍 Main Open Auditorium</span>
+                            </div>
+                        </div>
+                        <div class="event-card" data-event="milestone">
+                            <div class="event-date">
+                                <span class="event-day">25</span>
+                                <span class="event-month">OCT</span>
+                            </div>
+                            <div class="event-info">
+                                <h3>National Tech Fest "Milestone"</h3>
+                                <p>24hr Hackathon, Robo-Race & Code Sprint</p>
+                                <span class="event-location">📍 Computer Engg Wing</span>
+                            </div>
+                        </div>
+                        <div class="event-card" data-event="sports">
+                            <div class="event-date">
+                                <span class="event-day">01</span>
+                                <span class="event-month">NOV</span>
+                            </div>
+                            <div class="event-info">
+                                <h3>Annual Sports Meet</h3>
+                                <p>Inter-department cricket & athletics meet</p>
+                                <span class="event-location">📍 SSBT Sports Ground</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Today's Schedule -->
+                <section class="schedule-section">
+                    <h2 class="section-title">
+                        <span class="title-accent"></span>
+                        Today's Schedule
+                    </h2>
+                    <div class="schedule-list">
+                        <div class="schedule-item active-class">
+                            <div class="schedule-time">
+                                <span class="time-start">09:00</span>
+                                <span class="time-end">10:00</span>
+                            </div>
+                            <div class="schedule-bar"></div>
+                            <div class="schedule-detail">
+                                <h4>Data Structures & Algorithms</h4>
+                                <p>Prof. A. R. Sharma • Room 301</p>
+                                <span class="schedule-tag ongoing">Ongoing</span>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span class="time-start">10:15</span>
+                                <span class="time-end">11:15</span>
+                            </div>
+                            <div class="schedule-bar"></div>
+                            <div class="schedule-detail">
+                                <h4>Operating Systems</h4>
+                                <p>Prof. S. P. Patel • Room 205</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span class="time-start">11:30</span>
+                                <span class="time-end">12:30</span>
+                            </div>
+                            <div class="schedule-bar"></div>
+                            <div class="schedule-detail">
+                                <h4>Computer Networks & Security</h4>
+                                <p>Prof. V. Deshmukh • Lab 102</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="schedule-time">
+                                <span class="time-start">02:00</span>
+                                <span class="time-end">04:00</span>
+                            </div>
+                            <div class="schedule-bar"></div>
+                            <div class="schedule-detail">
+                                <h4>DBMS & SQL Practical Lab</h4>
+                                <p>Prof. M. Kulkarni • CS Lab 304</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ================= VIEW 2: COURSES ================= -->
+            <div class="app-view" id="viewCourses">
+                <div class="view-header">
+                    <div>
+                        <h2 class="view-title">Enrolled Courses</h2>
+                        <p class="view-subtitle">Computer Engineering • Semester VI</p>
+                    </div>
+                    <span class="badge-pill">6 Subjects</span>
+                </div>
+
+                <div class="courses-list">
+                    <!-- Course 1 -->
+                    <div class="course-card">
+                        <div class="course-top">
+                            <span class="course-code">CS-601 • 4 Credits</span>
+                            <span class="course-att-badge good">88% Attendance</span>
+                        </div>
+                        <h3 class="course-name">Advanced Data Structures & Algorithms</h3>
+                        <p class="course-faculty">Faculty: Prof. A. R. Sharma (Room 301)</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Syllabus Covered</span>
+                                <span>82%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn-outline-sm" data-toast="Downloading CS-601 Syllabus...">📄 Syllabus</button>
+                            <button class="btn-solid-sm" data-toast="Opening CS-601 Notes...">📖 Study Notes</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div class="course-card">
+                        <div class="course-top">
+                            <span class="course-code">CS-602 • 4 Credits</span>
+                            <span class="course-att-badge good">82% Attendance</span>
+                        </div>
+                        <h3 class="course-name">Operating Systems & Architecture</h3>
+                        <p class="course-faculty">Faculty: Prof. S. P. Patel (Room 205)</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Syllabus Covered</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn-outline-sm" data-toast="Downloading CS-602 Syllabus...">📄 Syllabus</button>
+                            <button class="btn-solid-sm" data-toast="Opening CS-602 Notes...">📖 Study Notes</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div class="course-card">
+                        <div class="course-top">
+                            <span class="course-code">CS-603 • 3 Credits</span>
+                            <span class="course-att-badge good">91% Attendance</span>
+                        </div>
+                        <h3 class="course-name">Database Management Systems</h3>
+                        <p class="course-faculty">Faculty: Prof. M. Kulkarni (Lab 304)</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Syllabus Covered</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn-outline-sm" data-toast="Downloading CS-603 Syllabus...">📄 Syllabus</button>
+                            <button class="btn-solid-sm" data-toast="Opening CS-603 Notes...">📖 Study Notes</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 4 -->
+                    <div class="course-card">
+                        <div class="course-top">
+                            <span class="course-code">CS-604 • 3 Credits</span>
+                            <span class="course-att-badge warning">78% Attendance</span>
+                        </div>
+                        <h3 class="course-name">Computer Networks & Cyber Security</h3>
+                        <p class="course-faculty">Faculty: Prof. V. Deshmukh (Lab 102)</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Syllabus Covered</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn-outline-sm" data-toast="Downloading CS-604 Syllabus...">📄 Syllabus</button>
+                            <button class="btn-solid-sm" data-toast="Opening CS-604 Notes...">📖 Study Notes</button>
+                        </div>
+                    </div>
+
+                    <!-- Course 5 -->
+                    <div class="course-card">
+                        <div class="course-top">
+                            <span class="course-code">CS-605 • 4 Credits</span>
+                            <span class="course-att-badge good">85% Attendance</span>
+                        </div>
+                        <h3 class="course-name">Artificial Intelligence & Machine Learning</h3>
+                        <p class="course-faculty">Faculty: Prof. R. B. Patil (Room 302)</p>
+                        <div class="progress-container">
+                            <div class="progress-labels">
+                                <span>Syllabus Covered</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn-outline-sm" data-toast="Downloading CS-605 Syllabus...">📄 Syllabus</button>
+                            <button class="btn-solid-sm" data-toast="Opening CS-605 Notes...">📖 Study Notes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 3: EVENTS ================= -->
+            <div class="app-view" id="viewEvents">
+                <div class="view-header">
+                    <div>
+                        <h2 class="view-title">Campus Events</h2>
+                        <p class="view-subtitle">Explore & participate in SSBT activities</p>
+                    </div>
+                </div>
+
+                <!-- Event Filter Chips -->
+                <div class="filter-chips">
+                    <button class="chip active" data-filter="all">All</button>
+                    <button class="chip" data-filter="tech">Technical</button>
+                    <button class="chip" data-filter="cultural">Cultural</button>
+                    <button class="chip" data-filter="sports">Sports</button>
+                </div>
+
+                <div class="events-vertical-list">
+                    <!-- Event 1 -->
+                    <div class="event-card-lg" data-category="cultural">
+                        <div class="event-card-lg-header">
+                            <div class="event-tag-badge cultural">Cultural</div>
+                            <span class="event-status open">Open for Registration</span>
+                        </div>
+                        <div class="event-card-lg-body">
+                            <div class="event-date-box">
+                                <span class="day">20</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>Annual Gathering "Udaan 2026"</h3>
+                                <p>Dance, Drama, Singing & Student Awards with special celebrity guest performance.</p>
+                                <div class="event-meta-row">
+                                    <span>📍 Main Open Auditorium</span>
+                                    <span>⏰ 05:00 PM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-block-terracotta" data-toast="Registered for Udaan 2026! Confirmation code: UD-984">Register for Event</button>
+                    </div>
+
+                    <!-- Event 2 -->
+                    <div class="event-card-lg" data-category="tech">
+                        <div class="event-card-lg-header">
+                            <div class="event-tag-badge tech">Technical</div>
+                            <span class="event-status open">Cash Prize ₹50,000</span>
+                        </div>
+                        <div class="event-card-lg-body">
+                            <div class="event-date-box">
+                                <span class="day">25</span>
+                                <span class="month">OCT</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>National Tech Fest "Milestone 2026"</h3>
+                                <p>24-hour Hackathon, Robo-Wars, Project Competition, and Web3 Coding Sprints.</p>
+                                <div class="event-meta-row">
+                                    <span>📍 CS & IT Complex</span>
+                                    <span>⏰ 09:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-block-terracotta" data-toast="Registered for Milestone Hackathon! Team code sent.">Register Team</button>
+                    </div>
+
+                    <!-- Event 3 -->
+                    <div class="event-card-lg" data-category="sports">
+                        <div class="event-card-lg-header">
+                            <div class="event-tag-badge sports">Sports</div>
+                            <span class="event-status open">Open</span>
+                        </div>
+                        <div class="event-card-lg-body">
+                            <div class="event-date-box">
+                                <span class="day">01</span>
+                                <span class="month">NOV</span>
+                            </div>
+                            <div class="event-details">
+                                <h3>Inter-Department Sports Meet</h3>
+                                <p>Cricket, Football, Badminton, Table Tennis, and Volleyball tournaments.</p>
+                                <div class="event-meta-row">
+                                    <span>📍 SSBT Sports Ground</span>
+                                    <span>⏰ 08:00 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-block-terracotta" data-toast="Enrolled for Sports Trials!">Join Tournament</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 4: ACADEMIC CALENDAR ================= -->
+            <div class="app-view" id="viewCalendar">
+                <div class="view-header">
+                    <div>
+                        <h2 class="view-title">Academic Calendar</h2>
+                        <p class="view-subtitle">Academic Year 2026 - 2027</p>
+                    </div>
+                    <button class="btn-outline-sm" data-toast="Academic Calendar PDF Downloaded!"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PDF</button>
+                </div>
+
+                <!-- Mini Month Banner -->
+                <div class="month-pill-bar">
+                    <span class="month-active">October 2026</span>
+                    <span class="month-info">Term II in progress</span>
+                </div>
+
+                <!-- Timeline items -->
+                <div class="calendar-timeline">
+                    <div class="timeline-card">
+                        <div class="timeline-date-col">
+                            <span class="t-day">18</span>
+                            <span class="t-month">OCT</span>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-type milestone">Milestone</span>
+                            <h4>Syllabus Completion (Unit 1 & 2)</h4>
+                            <p>Submission of internal assessment question papers.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card active-target">
+                        <div class="timeline-date-col">
+                            <span class="t-day">22</span>
+                            <span class="t-month">OCT</span>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-type exam">In-Sem Exam</span>
+                            <h4>Mid-Semester Theory Tests</h4>
+                            <p>Tests conducted from Oct 22 to Oct 27 for all branches.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card">
+                        <div class="timeline-date-col">
+                            <span class="t-day">04</span>
+                            <span class="t-month">NOV</span>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-type submission">Project</span>
+                            <h4>Minor Project Review - Phase I</h4>
+                            <p>Presentation before departmental evaluation committee.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card">
+                        <div class="timeline-date-col">
+                            <span class="t-day">10</span>
+                            <span class="t-month">NOV</span>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-type holiday">Vacation</span>
+                            <h4>Diwali Break Begins</h4>
+                            <p>College re-opens for regular lectures on Nov 24, 2026.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-card">
+                        <div class="timeline-date-col">
+                            <span class="t-day">15</span>
+                            <span class="t-month">DEC</span>
+                        </div>
+                        <div class="timeline-content">
+                            <span class="timeline-type exam">University Exam</span>
+                            <h4>End-Semester Practical & Viva</h4>
+                            <p>University external lab exams and project defense.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 5: PROFILE ================= -->
+            <div class="app-view" id="viewProfile">
+                <div class="view-header">
+                    <div>
+                        <h2 class="view-title">Student Profile</h2>
+                        <p class="view-subtitle">Official Student Identity & Academic Record</p>
+                    </div>
+                </div>
+
+                <!-- Digital College ID Card -->
+                <div class="student-id-card">
+                    <div class="id-card-header">
+                        <img src="logo.jpg" alt="SSBT Logo" class="id-logo">
+                        <div class="id-inst-info">
+                            <h3>SSBT's COET</h3>
+                            <p>Bambhori, Jalgaon (M.S.)</p>
+                        </div>
+                        <span class="id-chip-label">DIGITAL ID</span>
+                    </div>
+
+                    <div class="id-card-body">
+                        <div class="id-photo-wrapper">
+                            <div class="id-avatar-placeholder">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                            </div>
+                            <span class="id-batch">2022 - 2026</span>
+                        </div>
+                        <div class="id-student-info">
+                            <h2 class="id-name">Piyush Patil</h2>
+                            <p class="id-branch">B.Tech Computer Engg</p>
+                            <div class="id-field-grid">
+                                <div><span class="id-lbl">Roll No:</span> <strong>TY-CS-42</strong></div>
+                                <div><span class="id-lbl">Semester:</span> <strong>VI (Third Year)</strong></div>
+                                <div><span class="id-lbl">PRN:</span> <strong>2022015400012345</strong></div>
+                                <div><span class="id-lbl">Blood Grp:</span> <strong>O+ve</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="id-card-footer">
+                        <div class="id-barcode">
+                            <div class="barcode-lines"></div>
+                            <span>VERIFIED BY SSBT AUTONOMOUS PORTAL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Highlights -->
+                <div class="profile-stats-card">
+                    <div class="p-stat">
+                        <span class="p-val">8.65</span>
+                        <span class="p-lbl">Cumulative GPA</span>
+                    </div>
+                    <div class="p-stat-sep"></div>
+                    <div class="p-stat">
+                        <span class="p-val">124</span>
+                        <span class="p-lbl">Earned Credits</span>
+                    </div>
+                    <div class="p-stat-sep"></div>
+                    <div class="p-stat">
+                        <span class="p-val">0</span>
+                        <span class="p-lbl">Backlogs</span>
+                    </div>
+                </div>
+
+                <!-- Personal Info List -->
+                <div class="profile-section-card">
+                    <h3 class="card-mini-title">Personal & Contact Details</h3>
+                    <div class="info-row">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">piyush.cs@ssbt.ac.in</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Mobile</span>
+                        <span class="info-value">+91 98765 43210</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Department</span>
+                        <span class="info-value">Computer Engineering</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Mentor</span>
+                        <span class="info-value">Dr. K. P. Adhiya</span>
+                    </div>
+                </div>
+
+                <!-- App Theme Settings Card -->
+                <div class="profile-section-card">
+                    <h3 class="card-mini-title">App Theme & Appearance</h3>
+                    <div style="margin-top: 10px;">
+                        <div class="theme-toggle-group">
+                            <button class="theme-btn active" data-theme-val="default">
+                                <span class="theme-swatch sapphire-amber"></span>
+                                <div class="theme-btn-text">
+                                    <strong>Navy & Amber</strong>
+                                    <small>Palette 1 (Default)</small>
+                                </div>
+                            </button>
+                            <button class="theme-btn" data-theme-val="college">
+                                <span class="theme-swatch college-olive"></span>
+                                <div class="theme-btn-text">
+                                    <strong>College Theme</strong>
+                                    <small>Palette 2 (Olive & Gold)</small>
+                                </div>
+                            </button>
+                            <button class="theme-btn" data-theme-val="rose">
+                                <span class="theme-swatch crimson-rose"></span>
+                                <div class="theme-btn-text">
+                                    <strong>Crimson Rose</strong>
+                                    <small>Palette 3 (Ruby & Blush)</small>
+                                </div>
+                            </button>
+                            <button class="theme-btn" data-theme-val="dark">
+                                <span class="theme-swatch dark-mode"></span>
+                                <div class="theme-btn-text">
+                                    <strong>Dark Mode</strong>
+                                    <small>Theme 4 (Obsidian & Gold)</small>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn-block-terracotta" data-toast="Digital ID Card Downloaded to device!">Download Digital ID</button>
+                </div>
+            </div>
+
+            <!-- ================= VIEW 6: HELP & SUPPORT ================= -->
+            <div class="app-view" id="viewHelp">
+                <div class="view-header">
+                    <div>
+                        <h2 class="view-title">Help & Student Support</h2>
+                        <p class="view-subtitle">24/7 Campus helplines & query resolution</p>
+                    </div>
+                </div>
+
+                <!-- Emergency / Helpline Cards -->
+                <div class="helpline-grid">
+                    <div class="help-card" data-copy="+91 257 2258393">
+                        <div class="help-icon-box phone">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div class="help-content">
+                            <h4>College Helpline</h4>
+                            <p>0257 - 2258393</p>
+                            <span class="help-action-tag">Tap to copy</span>
+                        </div>
+                    </div>
+
+                    <div class="help-card" data-copy="1800-180-5522">
+                        <div class="help-icon-box shield">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="help-content">
+                            <h4>Anti-Ragging Cell</h4>
+                            <p>1800-180-5522 (Toll-Free)</p>
+                            <span class="help-action-tag">24x7 National</span>
+                        </div>
+                    </div>
+
+                    <div class="help-card" data-copy="exam@ssbt.ac.in">
+                        <div class="help-icon-box mail">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div class="help-content">
+                            <h4>Exam & Result Cell</h4>
+                            <p>exam@ssbt.ac.in</p>
+                            <span class="help-action-tag">Room 104 Admin</span>
+                        </div>
+                    </div>
+
+                    <div class="help-card" data-copy="support@ssbt.ac.in">
+                        <div class="help-icon-box wifi">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        </div>
+                        <div class="help-content">
+                            <h4>Campus Wi-Fi / IT</h4>
+                            <p>support@ssbt.ac.in</p>
+                            <span class="help-action-tag">Server Room</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Accordion -->
+                <div class="help-section-box">
+                    <h3 class="card-mini-title">Frequently Asked Questions</h3>
+                    <div class="faq-list">
+                        <details class="faq-item">
+                            <summary>How do I apply for a Bonafide Certificate?</summary>
+                            <p>Submit a request through the Student Portal or visit Student Section Window No. 3 with your college ID card. Processing takes 24 working hours.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>What is the minimum attendance requirement?</summary>
+                            <p>As per university and college autonomous norms, a minimum of 75% attendance is compulsory in lectures and practicals to be eligible for exams.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>How do I renew books in the library?</summary>
+                            <p>Books can be renewed twice via the Library counter or the online Web-OPAC portal before the due date stamp.</p>
+                        </details>
+                        <details class="faq-item">
+                            <summary>Where can I pay semester and hostel fees?</summary>
+                            <p>Online payment can be completed via NetBanking/UPI in the Fees tab, or at the college Accounts Counter via DD/Card.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Submit a ticket form -->
+                <div class="help-section-box">
+                    <h3 class="card-mini-title">Raise a Support Ticket / Grievance</h3>
+                    <form id="supportForm" class="support-form">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select class="form-select" id="ticketCategory" required>
+                                <option value="Academic & Lectures">Academic & Lectures</option>
+                                <option value="Exam & Marks">Exam & Hall Ticket</option>
+                                <option value="Fee & Accounts">Fee & Accounts</option>
+                                <option value="Library">Library & Books</option>
+                                <option value="Wi-Fi / ERP Login">Wi-Fi / ERP Login</option>
+                                <option value="Hostel & Mess">Hostel & Mess</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Message / Query</label>
+                            <textarea class="form-textarea" id="ticketMsg" rows="3" placeholder="Describe your issue or request here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-block-terracotta">Submit Support Ticket</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom spacer for bottom nav -->
+            <div class="bottom-spacer"></div>
+        </main>
+
+        <!-- Quick Access Modal Sheet (Interactive Popup for Dashboard) -->
+        <div class="modal-overlay" id="quickModalOverlay">
+            <div class="modal-sheet" id="quickModalSheet">
+                <div class="modal-drag-bar"></div>
+                <div class="modal-header">
+                    <h3 id="modalTitle">Quick View</h3>
+                    <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification Alert -->
+        <div class="toast-bubble" id="toastBubble">Action completed successfully</div>
+
+        <!-- Bottom Navigation Bar (6 Tabs: Home, Courses, Events, Calendar, Profile, Help) -->
+        <nav class="bottom-nav" id="bottomNav">
+            <div class="nav-item active" data-tab="home" id="navHome" title="Home">
+                <div class="nav-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </div>
+                <span class="nav-label">Home</span>
+                <div class="nav-indicator"></div>
+            </div>
+            <div class="nav-item" data-tab="courses" id="navCourses" title="Courses">
+                <div class="nav-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <span class="nav-label">Courses</span>
+                <div class="nav-indicator"></div>
+            </div>
+            <div class="nav-item" data-tab="events" id="navEvents" title="Events">
+                <div class="nav-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>
+                </div>
+                <span class="nav-label">Events</span>
+                <div class="nav-indicator"></div>
+            </div>
+            <div class="nav-item" data-tab="calendar" id="navCalendar" title="Calendar">
+                <div class="nav-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <span class="nav-label">Calendar</span>
+                <div class="nav-indicator"></div>
+            </div>
+            <div class="nav-item" data-tab="profile" id="navProfile" title="Profile">
+                <div class="nav-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <span class="nav-label">Profile</span>
+                <div class="nav-indicator"></div>
+            </div>
+            <div class="nav-item" data-tab="help" id="navHelp" title="Help">
+                <div class="nav-icon-wrapper">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <span class="nav-label">Help</span>
+                <div class="nav-indicator"></div>
+            </div>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
