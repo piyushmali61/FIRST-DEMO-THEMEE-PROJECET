@@ -523,7 +523,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => ripple.remove(), 600);
     }
 
-    // ---- 10. Multi-Theme Switcher (Default vs College vs Crimson Rose) ----
+        // ---- 10. Multi-Theme Switcher (6 Full Curated Themes) ----
     const themeMetadata = {
         default: {
             name: 'Navy & Amber',
@@ -535,6 +535,11 @@ document.addEventListener('DOMContentLoaded', () => {
             currentIcon: '🏛️',
             toast: '🏛️ Switched to College Theme (Olive & Gold)!'
         },
+        college2: {
+            name: 'College Theme 2',
+            currentIcon: '🎓',
+            toast: '🎓 Switched to College Theme 2 (Olive Bronze & Warm Sand)!'
+        },
         rose: {
             name: 'Crimson Rose',
             currentIcon: '🌹',
@@ -543,11 +548,16 @@ document.addEventListener('DOMContentLoaded', () => {
         dark: {
             name: 'Pratik Mode',
             currentIcon: '🌙',
-            toast: '🌙 Switched to Pratik Mode (Dark & Creamy)!'
+            toast: '🌙 Switched to Pratik Mode (Dark College & Cream)!'
+        },
+        dark2: {
+            name: 'College Dark 2',
+            currentIcon: '🌘',
+            toast: '🌘 Switched to College Dark 2 (Charcoal & Amber Ochre)!'
         }
     };
 
-    const themeCycle = ['default', 'college', 'rose', 'dark'];
+    const themeCycle = ['default', 'college', 'college2', 'rose', 'dark', 'dark2'];
 
     function applyTheme(themeName, showFeedback = false) {
         if (!themeMetadata[themeName]) themeName = 'default';
@@ -558,13 +568,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const frame = document.querySelector('.mobile-frame');
         if (frame) frame.setAttribute('data-theme', themeName);
 
-        document.body.classList.remove('theme-college', 'theme-rose', 'theme-dark');
+        document.body.classList.remove('theme-college', 'theme-college2', 'theme-rose', 'theme-dark', 'theme-dark2');
         if (themeName === 'college') {
             document.body.classList.add('theme-college');
+        } else if (themeName === 'college2') {
+            document.body.classList.add('theme-college2');
         } else if (themeName === 'rose') {
             document.body.classList.add('theme-rose');
         } else if (themeName === 'dark') {
             document.body.classList.add('theme-dark');
+        } else if (themeName === 'dark2') {
+            document.body.classList.add('theme-dark2');
         }
 
         try {

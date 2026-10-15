@@ -39,6 +39,31 @@ A mobile-first web portal for **SSBT's College of Engineering & Technology, Bamb
 - **Earthy Muted Khaki:** `#807E12`
 - **Soft Parchment Cream Text:** `#F7F7C9` / `#D4D3A2`
 
+### 5. 🎓 Theme 5: College Theme 2 (Deep Olive Bronze & Warm Sand)
+- **Primary Brand (Deep Olive Bronze):** `#5E532B`
+- **Primary Tint (Warm Sand):** `#EDE6D6`
+- **Warm Highlight (Amber Ochre):** `#C98A4B`
+- **Secondary Accent (Slate Indigo):** `#4E546B`
+- **App Background (Warm Alabaster):** `#F5F4F0`
+- **Hero Surface (Soft Cream):** `#EFECE4`
+- **Card Surface (Crisp White):** `#FFFFFF`
+- **Neutral Container (Stone Gray):** `#F0EFEA`
+- **Border / Divider (Subtle Warm Gray):** `#E4E1D8`
+- **Text Primary (Deep Charcoal):** `#1F1F1D`
+- **Text Secondary (Muted Charcoal):** `#4A4945`
+- **Text Muted (Warm Gray):** `#85827A`
+- **Text Accent (Olive Brown):** `#70643B`
+
+### 6. 🌘 Theme 6: College Dark 2 (Deep Charcoal & Amber Ochre)
+- **App Background (Deep Stone Charcoal):** `#161614`
+- **Card Surface (Dark Stone):** `#1D1C19`
+- **Hero Surface (Warm Dark Stone):** `#23221E`
+- **Warm Highlight / Accent (Amber Ochre):** `#C98A4B`
+- **Primary Brand (Deep Olive Bronze):** `#8E7E44` / `#5E532B`
+- **Primary Typography (Warm Alabaster):** `#F5F4F0`
+- **Secondary Typography (Warm Sand):** `#EDE6D6`
+- **Muted Text (Warm Gray):** `#85827A`
+
 ---
 
 ## 🚀 Key Features

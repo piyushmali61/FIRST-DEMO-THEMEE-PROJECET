@@ -3132,3 +3132,633 @@ body.theme-dark {
 .theme-swatch.pratik-mode {
     background: linear-gradient(135deg, #232207 50%, #A19E17 50%);
 }
+
+
+/* ============================================
+   THEME 5: COLLEGE THEME 2
+   Deep Olive Bronze, Warm Sand, Amber Ochre, Slate Indigo, Warm Alabaster
+   Exact Clean UI Specification
+   ============================================ */
+:root[data-theme="college2"],
+body[data-theme="college2"],
+body.theme-college2 {
+    --theme-name: "college2";
+    --body-bg: #EAE6DC;
+
+    /* Core Semantic Tokens */
+    --gold: #5E532B;             /* Primary Brand: Deep Olive Bronze */
+    --gold-light: #70643B;       /* Text Accent: Olive Brown */
+    --gold-dark: #4A4121;
+    --olive-dark: #1F1F1D;       /* Text Primary: Deep Charcoal */
+    --olive-deep: #161614;
+    --cream: #EDE6D6;            /* Primary Tint: Warm Sand */
+    --cream-light: #F5F4F0;      /* App Background: Warm Alabaster */
+    --cream-dark: #E4E1D8;       /* Border / Divider: Subtle Warm Gray */
+
+    /* Extended Color Tokens */
+    --orange-primary: #5E532B;
+    --amber-gold: #C98A4B;       /* Warm Highlight: Amber Ochre */
+    --sun-yellow: #EDE6D6;
+    --navy-deep: #1F1F1D;
+    --navy-darker: #161614;
+    --off-white: #FFFFFF;        /* Card Surface: Crisp White */
+    --ice-aqua: #F0EFEA;         /* Neutral Container: Stone Gray */
+    --blue-ocean: #4E546B;       /* Secondary Accent: Slate Indigo */
+
+    /* Functional Surfaces */
+    --bg-primary: #F5F4F0;       /* App Background: Warm Alabaster */
+    --bg-secondary: #FFFFFF;     /* Card Surface: Crisp White */
+    --bg-card: #FFFFFF;
+    --bg-card-hover: #F8F7F3;
+    --bg-elevated: #FFFFFF;
+
+    /* Typography */
+    --text-primary: #1F1F1D;     /* Deep Charcoal */
+    --text-secondary: #4A4945;   /* Muted Charcoal */
+    --text-muted: #85827A;       /* Warm Gray */
+    --text-accent: #70643B;      /* Olive Brown */
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, #5E532B 0%, #70643B 100%);
+    --gradient-primary: linear-gradient(135deg, #1F1F1D 0%, #5E532B 100%);
+    --gradient-ocean: linear-gradient(135deg, #4E546B 0%, #1F1F1D 100%);
+    --gradient-sunset: linear-gradient(135deg, #C98A4B 0%, #EDE6D6 100%);
+    --gradient-dark: linear-gradient(180deg, #F5F4F0 0%, #E8E5DC 100%);
+    --gradient-card: linear-gradient(145deg, #EFECE4 0%, #F5F4F0 100%); /* Hero Surface: Soft Cream */
+    --gradient-shine: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(94, 83, 43, 0.08) 50%, rgba(237, 230, 214, 0.5) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(31, 31, 29, 0.06);
+    --shadow-md: 0 4px 20px rgba(31, 31, 29, 0.08);
+    --shadow-lg: 0 8px 40px rgba(31, 31, 29, 0.12);
+    --shadow-gold: 0 4px 20px rgba(94, 83, 43, 0.22);
+    --shadow-glow: 0 0 30px rgba(94, 83, 43, 0.18);
+    --shadow-navy: 0 4px 20px rgba(78, 84, 107, 0.18);
+
+    /* Component Overrides */
+    --btn-icon-color: #5E532B;
+    --btn-icon-border: rgba(94, 83, 43, 0.2);
+    --btn-icon-bg: #F0EFEA;
+    --appbar-divider: #E4E1D8;
+    --badge-bg: #5E532B;
+    --badge-shadow: rgba(94, 83, 43, 0.4);
+}
+
+/* College Theme 2 Component Styling */
+[data-theme="college2"] .app-bar {
+    background: rgba(245, 244, 240, 0.95) !important;
+    border-bottom: 1px solid #E4E1D8;
+}
+
+[data-theme="college2"] .status-bar {
+    background: #F5F4F0 !important;
+}
+
+[data-theme="college2"] .bottom-nav {
+    background: #FFFFFF !important;
+    border-top: 1px solid #E4E1D8 !important;
+    box-shadow: 0 -4px 20px rgba(31, 31, 29, 0.06) !important;
+}
+
+[data-theme="college2"] .app-logo {
+    border-color: #5E532B !important;
+}
+
+[data-theme="college2"] .icon-btn {
+    border-color: #E4E1D8 !important;
+    background: #F0EFEA !important;
+    color: #4A4945 !important;
+}
+
+[data-theme="college2"] .icon-btn:hover,
+[data-theme="college2"] .icon-btn:active {
+    background: #EDE6D6 !important;
+    border-color: #5E532B !important;
+    color: #5E532B !important;
+}
+
+[data-theme="college2"] .hamburger-line {
+    background: #5E532B !important;
+}
+
+[data-theme="college2"] .notif-badge {
+    background: #5E532B !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 6px rgba(94, 83, 43, 0.4) !important;
+}
+
+[data-theme="college2"] .welcome-card {
+    background: #EFECE4 !important; /* Hero Surface: Soft Cream */
+    border: 1px solid #E4E1D8 !important;
+    box-shadow: 0 6px 24px rgba(31, 31, 29, 0.05) !important;
+}
+
+[data-theme="college2"] .stat-divider {
+    background: #E4E1D8 !important;
+}
+
+[data-theme="college2"] .title-accent {
+    background: #5E532B !important;
+}
+
+[data-theme="college2"] .greeting::before {
+    content: '' !important;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #C98A4B !important; /* Amber Ochre Status Dot */
+    box-shadow: 0 0 8px rgba(201, 138, 75, 0.7);
+    margin-right: 2px;
+}
+
+[data-theme="college2"] .greeting {
+    color: #C98A4B !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="college2"] .avatar-circle {
+    background: #5E532B !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 16px rgba(94, 83, 43, 0.35) !important;
+}
+
+/* Primary Tint Containers: Attendance, Timetable, Library */
+[data-theme="college2"] .attendance-icon,
+[data-theme="college2"] .timetable-icon,
+[data-theme="college2"] .library-icon {
+    background: #EDE6D6 !important;
+    color: #5E532B !important;
+    border: 1px solid rgba(94, 83, 43, 0.15) !important;
+}
+
+/* Neutral Containers: Results, Fees, Notices */
+[data-theme="college2"] .results-icon,
+[data-theme="college2"] .fees-icon,
+[data-theme="college2"] .notices-icon {
+    background: #F0EFEA !important;
+    color: #4A4945 !important;
+    border: 1px solid #E4E1D8 !important;
+}
+
+[data-theme="college2"] .dash-card {
+    background: #FFFFFF !important;
+    border-color: #E4E1D8 !important;
+}
+
+[data-theme="college2"] .dash-card:hover {
+    border-color: #5E532B !important;
+    box-shadow: 0 4px 18px rgba(94, 83, 43, 0.14) !important;
+}
+
+[data-theme="college2"] .dash-label {
+    color: #1F1F1D !important;
+}
+
+[data-theme="college2"] .dash-meta {
+    color: #85827A !important;
+}
+
+[data-theme="college2"] .btn-block-terracotta {
+    background: linear-gradient(135deg, #5E532B 0%, #70643B 100%) !important;
+    box-shadow: 0 4px 14px rgba(94, 83, 43, 0.3) !important;
+    color: #FFFFFF !important;
+}
+
+[data-theme="college2"] .btn-block-terracotta:hover {
+    background: linear-gradient(135deg, #4A4121 0%, #5E532B 100%) !important;
+    box-shadow: 0 6px 20px rgba(94, 83, 43, 0.4) !important;
+}
+
+[data-theme="college2"] .student-id-card {
+    background: linear-gradient(145deg, #FFFFFF 0%, #EFECE4 100%) !important;
+    border-color: #E4E1D8 !important;
+    box-shadow: 0 8px 30px rgba(31, 31, 29, 0.08) !important;
+}
+
+[data-theme="college2"] .id-logo {
+    border-color: #5E532B !important;
+}
+
+[data-theme="college2"] .toast-bubble {
+    background: #1F1F1D !important;
+    border: 1px solid #5E532B !important;
+    color: #F5F4F0 !important;
+    box-shadow: 0 6px 24px rgba(31, 31, 29, 0.3) !important;
+}
+
+[data-theme="college2"] .event-card,
+[data-theme="college2"] .event-card-lg,
+[data-theme="college2"] .course-card,
+[data-theme="college2"] .schedule-item,
+[data-theme="college2"] .timeline-card,
+[data-theme="college2"] .help-card,
+[data-theme="college2"] .help-section-box,
+[data-theme="college2"] .profile-stats-card,
+[data-theme="college2"] .profile-section-card {
+    background: #FFFFFF !important;
+    border-color: #E4E1D8 !important;
+}
+
+[data-theme="college2"] .progress-bar-bg {
+    background: #EDE6D6 !important;
+    border: 1px solid #E4E1D8;
+}
+
+[data-theme="college2"] .nav-item.active .nav-icon-wrapper {
+    background: #EDE6D6 !important; /* Active Nav Pill: Warm Sand */
+    color: #5E532B !important;
+}
+
+[data-theme="college2"] .nav-item.active .nav-label {
+    color: #5E532B !important;
+}
+
+[data-theme="college2"] .nav-indicator {
+    background: #5E532B !important;
+}
+
+[data-theme="college2"] .side-menu {
+    background: #F5F4F0 !important;
+    border-right-color: #E4E1D8 !important;
+}
+
+[data-theme="college2"] .side-menu-list li:hover,
+[data-theme="college2"] .side-menu-list li.active {
+    color: #5E532B !important;
+    background: #EDE6D6 !important;
+}
+
+[data-theme="college2"] .chip.active,
+[data-theme="college2"] .chip:hover {
+    background: #5E532B !important;
+    border-color: #5E532B !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 2px 8px rgba(94, 83, 43, 0.3) !important;
+}
+
+[data-theme="college2"] .timeline-card.active-target {
+    border-left-color: #5E532B !important;
+}
+
+[data-theme="college2"] .theme-switcher-box {
+    border-color: #E4E1D8 !important;
+    background: #FFFFFF !important;
+}
+
+
+/* ============================================
+   THEME 6: COLLEGE THEME DARK 2
+   Deep Charcoal Slate, Warm Dark Stone, Amber Ochre & Soft Cream
+   Dark Mode Counterpart to College Theme 2
+   ============================================ */
+:root[data-theme="dark2"],
+:root[data-theme="college-dark2"],
+body[data-theme="dark2"],
+body[data-theme="college-dark2"],
+body.theme-dark2,
+body.theme-college-dark2 {
+    --theme-name: "dark2";
+    --body-bg: #10100F;
+
+    /* Core Semantic Tokens */
+    --gold: #C98A4B;             /* Warm Highlight: Amber Ochre */
+    --gold-light: #DF9F63;
+    --gold-dark: #8E7E44;
+    --olive-dark: #F5F4F0;       /* Text Primary: Warm Alabaster */
+    --olive-deep: #FFFFFF;
+    --cream: #23221E;            /* Warm Dark Stone Surface */
+    --cream-light: #2A2924;
+    --cream-dark: #85827A;
+
+    /* Extended Color Tokens */
+    --orange-primary: #C98A4B;
+    --amber-gold: #DF9F63;
+    --sun-yellow: #EDE6D6;
+    --navy-deep: #F5F4F0;
+    --navy-darker: #FFFFFF;
+    --off-white: #1D1C19;
+    --ice-aqua: #262521;
+    --blue-ocean: #7E86A8;
+
+    /* Functional Surfaces */
+    --bg-primary: #161614;       /* App Background: Deep Stone Charcoal */
+    --bg-secondary: #1D1C19;     /* Card Surface: Dark Stone */
+    --bg-card: #1D1C19;
+    --bg-card-hover: #262521;
+    --bg-elevated: #23221E;
+
+    /* Typography */
+    --text-primary: #F5F4F0;     /* Warm Alabaster */
+    --text-secondary: #D7D3C8;   /* Soft Stone Cream */
+    --text-muted: #85827A;       /* Warm Gray */
+    --text-accent: #C98A4B;      /* Amber Ochre */
+
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, #C98A4B 0%, #DF9F63 100%);
+    --gradient-primary: linear-gradient(135deg, #23221E 0%, #161614 100%);
+    --gradient-ocean: linear-gradient(135deg, #4E546B 0%, #1D1C19 100%);
+    --gradient-sunset: linear-gradient(135deg, #C98A4B 0%, #EDE6D6 100%);
+    --gradient-dark: linear-gradient(180deg, #161614 0%, #10100F 100%);
+    --gradient-card: linear-gradient(145deg, #23221E 0%, #191816 100%);
+    --gradient-shine: linear-gradient(135deg, rgba(245, 244, 240, 0.12) 0%, transparent 60%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.65);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.8);
+    --shadow-gold: 0 4px 20px rgba(201, 138, 75, 0.3);
+    --shadow-glow: 0 0 30px rgba(201, 138, 75, 0.25);
+    --shadow-navy: 0 4px 20px rgba(0, 0, 0, 0.7);
+
+    /* Component Overrides */
+    --btn-icon-color: #C98A4B;
+    --btn-icon-border: rgba(201, 138, 75, 0.25);
+    --btn-icon-bg: #23221E;
+    --appbar-divider: rgba(228, 225, 216, 0.12);
+    --badge-bg: #C98A4B;
+    --badge-shadow: rgba(201, 138, 75, 0.5);
+}
+
+/* College Theme Dark 2 Component Styling */
+[data-theme="dark2"] .app-bar,
+[data-theme="college-dark2"] .app-bar {
+    background: rgba(22, 22, 20, 0.95) !important;
+    border-bottom: 1px solid rgba(228, 225, 216, 0.12);
+}
+
+[data-theme="dark2"] .status-bar,
+[data-theme="college-dark2"] .status-bar {
+    background: #161614 !important;
+}
+
+[data-theme="dark2"] .bottom-nav,
+[data-theme="college-dark2"] .bottom-nav {
+    background: #1D1C19 !important;
+    border-top: 1px solid rgba(228, 225, 216, 0.12) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="dark2"] .icon-btn,
+[data-theme="college-dark2"] .icon-btn {
+    border-color: rgba(228, 225, 216, 0.15) !important;
+    background: #23221E !important;
+    color: #D7D3C8 !important;
+}
+
+[data-theme="dark2"] .icon-btn:hover,
+[data-theme="dark2"] .icon-btn:active,
+[data-theme="college-dark2"] .icon-btn:hover,
+[data-theme="college-dark2"] .icon-btn:active {
+    background: #2A2924 !important;
+    border-color: #C98A4B !important;
+    color: #F5F4F0 !important;
+}
+
+[data-theme="dark2"] .hamburger-line,
+[data-theme="college-dark2"] .hamburger-line {
+    background: #C98A4B !important;
+}
+
+[data-theme="dark2"] .notif-badge,
+[data-theme="college-dark2"] .notif-badge {
+    background: #C98A4B !important;
+    color: #161614 !important;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(201, 138, 75, 0.5) !important;
+}
+
+[data-theme="dark2"] .welcome-card,
+[data-theme="college-dark2"] .welcome-card {
+    background: linear-gradient(145deg, #23221E 0%, #1A1916 100%) !important;
+    border: 1px solid rgba(228, 225, 216, 0.15) !important;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="dark2"] .stat-divider,
+[data-theme="college-dark2"] .stat-divider {
+    background: rgba(228, 225, 216, 0.15) !important;
+}
+
+[data-theme="dark2"] .title-accent,
+[data-theme="college-dark2"] .title-accent {
+    background: #C98A4B !important;
+}
+
+[data-theme="dark2"] .greeting::before,
+[data-theme="college-dark2"] .greeting::before {
+    content: '' !important;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #C98A4B !important;
+    box-shadow: 0 0 10px rgba(201, 138, 75, 0.8);
+    margin-right: 2px;
+}
+
+[data-theme="dark2"] .greeting,
+[data-theme="college-dark2"] .greeting {
+    color: #C98A4B !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark2"] .avatar-circle,
+[data-theme="college-dark2"] .avatar-circle {
+    background: linear-gradient(135deg, #8E7E44 0%, #C98A4B 100%) !important;
+    color: #161614 !important;
+    box-shadow: 0 4px 18px rgba(201, 138, 75, 0.35) !important;
+}
+
+[data-theme="dark2"] .attendance-icon,
+[data-theme="dark2"] .timetable-icon,
+[data-theme="dark2"] .library-icon,
+[data-theme="college-dark2"] .attendance-icon,
+[data-theme="college-dark2"] .timetable-icon,
+[data-theme="college-dark2"] .library-icon {
+    background: rgba(237, 230, 214, 0.12) !important;
+    color: #DF9F63 !important;
+    border: 1px solid rgba(201, 138, 75, 0.25) !important;
+}
+
+[data-theme="dark2"] .results-icon,
+[data-theme="dark2"] .fees-icon,
+[data-theme="dark2"] .notices-icon,
+[data-theme="college-dark2"] .results-icon,
+[data-theme="college-dark2"] .fees-icon,
+[data-theme="college-dark2"] .notices-icon {
+    background: #23221E !important;
+    color: #D7D3C8 !important;
+    border: 1px solid rgba(228, 225, 216, 0.14) !important;
+}
+
+[data-theme="dark2"] .dash-card,
+[data-theme="college-dark2"] .dash-card {
+    background: #1D1C19 !important;
+    border-color: rgba(228, 225, 216, 0.14) !important;
+}
+
+[data-theme="dark2"] .dash-card:hover,
+[data-theme="college-dark2"] .dash-card:hover {
+    border-color: #C98A4B !important;
+    background: #262521 !important;
+    box-shadow: 0 4px 18px rgba(201, 138, 75, 0.2) !important;
+}
+
+[data-theme="dark2"] .dash-label,
+[data-theme="college-dark2"] .dash-label {
+    color: #F5F4F0 !important;
+}
+
+[data-theme="dark2"] .dash-meta,
+[data-theme="college-dark2"] .dash-meta {
+    color: #85827A !important;
+}
+
+[data-theme="dark2"] .btn-block-terracotta,
+[data-theme="college-dark2"] .btn-block-terracotta {
+    background: linear-gradient(135deg, #C98A4B 0%, #DF9F63 100%) !important;
+    box-shadow: 0 4px 18px rgba(201, 138, 75, 0.35) !important;
+    color: #161614 !important;
+    font-weight: 800 !important;
+}
+
+[data-theme="dark2"] .btn-block-terracotta:hover,
+[data-theme="college-dark2"] .btn-block-terracotta:hover {
+    background: linear-gradient(135deg, #DF9F63 0%, #EDE6D6 100%) !important;
+    box-shadow: 0 6px 22px rgba(201, 138, 75, 0.45) !important;
+}
+
+[data-theme="dark2"] .student-id-card,
+[data-theme="college-dark2"] .student-id-card {
+    background: linear-gradient(145deg, #23221E 0%, #161614 100%) !important;
+    border-color: rgba(201, 138, 75, 0.3) !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+[data-theme="dark2"] .barcode-lines,
+[data-theme="college-dark2"] .barcode-lines {
+    background: repeating-linear-gradient(
+        90deg,
+        #EDE6D6,
+        #EDE6D6 2px,
+        transparent 2px,
+        transparent 5px,
+        #EDE6D6 5px,
+        #EDE6D6 8px,
+        transparent 8px,
+        transparent 10px
+    ) !important;
+    opacity: 0.92;
+}
+
+[data-theme="dark2"] .toast-bubble,
+[data-theme="college-dark2"] .toast-bubble {
+    background: #23221E !important;
+    border: 1px solid #C98A4B !important;
+    color: #F5F4F0 !important;
+    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.7) !important;
+}
+
+[data-theme="dark2"] .event-card,
+[data-theme="dark2"] .event-card-lg,
+[data-theme="dark2"] .course-card,
+[data-theme="dark2"] .schedule-item,
+[data-theme="dark2"] .timeline-card,
+[data-theme="dark2"] .help-card,
+[data-theme="dark2"] .help-section-box,
+[data-theme="dark2"] .profile-stats-card,
+[data-theme="dark2"] .profile-section-card,
+[data-theme="college-dark2"] .event-card,
+[data-theme="college-dark2"] .event-card-lg,
+[data-theme="college-dark2"] .course-card,
+[data-theme="college-dark2"] .schedule-item,
+[data-theme="college-dark2"] .timeline-card,
+[data-theme="college-dark2"] .help-card,
+[data-theme="college-dark2"] .help-section-box,
+[data-theme="college-dark2"] .profile-stats-card,
+[data-theme="college-dark2"] .profile-section-card {
+    background: #1D1C19 !important;
+    border-color: rgba(228, 225, 216, 0.14) !important;
+}
+
+[data-theme="dark2"] .progress-bar-bg,
+[data-theme="college-dark2"] .progress-bar-bg {
+    background: rgba(35, 34, 30, 0.9) !important;
+    border: 1px solid rgba(201, 138, 75, 0.2);
+}
+
+[data-theme="dark2"] .nav-item.active .nav-icon-wrapper,
+[data-theme="college-dark2"] .nav-item.active .nav-icon-wrapper {
+    background: rgba(201, 138, 75, 0.18) !important;
+    color: #DF9F63 !important;
+}
+
+[data-theme="dark2"] .nav-item.active .nav-label,
+[data-theme="college-dark2"] .nav-item.active .nav-label {
+    color: #DF9F63 !important;
+}
+
+[data-theme="dark2"] .nav-indicator,
+[data-theme="college-dark2"] .nav-indicator {
+    background: #C98A4B !important;
+    box-shadow: 0 0 10px rgba(201, 138, 75, 0.7);
+}
+
+[data-theme="dark2"] .side-menu,
+[data-theme="college-dark2"] .side-menu {
+    background: #191816 !important;
+    border-right-color: rgba(228, 225, 216, 0.14) !important;
+}
+
+[data-theme="dark2"] .side-menu-list li:hover,
+[data-theme="dark2"] .side-menu-list li.active,
+[data-theme="college-dark2"] .side-menu-list li:hover,
+[data-theme="college-dark2"] .side-menu-list li.active {
+    color: #DF9F63 !important;
+    background: rgba(201, 138, 75, 0.15) !important;
+}
+
+[data-theme="dark2"] .chip.active,
+[data-theme="dark2"] .chip:hover,
+[data-theme="college-dark2"] .chip.active,
+[data-theme="college-dark2"] .chip:hover {
+    background: #C98A4B !important;
+    border-color: #C98A4B !important;
+    color: #161614 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 10px rgba(201, 138, 75, 0.4) !important;
+}
+
+[data-theme="dark2"] .timeline-card.active-target,
+[data-theme="college-dark2"] .timeline-card.active-target {
+    border-left-color: #C98A4B !important;
+    background: #252420 !important;
+}
+
+[data-theme="dark2"] .theme-switcher-box,
+[data-theme="college-dark2"] .theme-switcher-box {
+    border-color: rgba(228, 225, 216, 0.16) !important;
+    background: #1D1C19 !important;
+}
+
+[data-theme="dark2"] .theme-btn,
+[data-theme="college-dark2"] .theme-btn {
+    background: #161614 !important;
+    color: #F5F4F0 !important;
+}
+
+[data-theme="dark2"] .theme-btn.active,
+[data-theme="college-dark2"] .theme-btn.active {
+    border-color: #C98A4B !important;
+    background: #2A2924 !important;
+}
+
+/* Swatches */
+.theme-swatch.college-two {
+    background: linear-gradient(135deg, #5E532B 50%, #EDE6D6 50%);
+}
+
+.theme-swatch.college-dark-two {
+    background: linear-gradient(135deg, #1D1C19 50%, #C98A4B 50%);
+}
