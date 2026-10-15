@@ -32,12 +32,12 @@ A mobile-first web portal for **SSBT's College of Engineering & Technology, Bamb
 - **Rose Whisper:** `#FCEEF1`
 - **Warm Linen:** `#F2EDD6`
 
-### 4. 🌙 Theme 4: Pratik Mode (Dark & Creamy Luxury)
-- **Warm Espresso Canvas:** `#1D1815`
-- **Elevated Cocoa Cards:** `#27221D`
-- **Radiant Honey Gold Accent:** `#E5BB58`
-- **Warm Caramel:** `#BF9032`
-- **Rich Clotted Cream Text:** `#FBF4E4`
+### 4. 🌙 Theme 4: Pratik Mode (Dark College & Cream Edition)
+- **Deep Olive Black Canvas:** `#171705`
+- **Elevated Dark Olive Cards:** `#232207` / `#2D2C0A`
+- **College Olive Gold Accent:** `#A19E17` / `#C4C12D`
+- **Earthy Muted Khaki:** `#807E12`
+- **Soft Parchment Cream Text:** `#F7F7C9` / `#D4D3A2`
 
 ---
 
