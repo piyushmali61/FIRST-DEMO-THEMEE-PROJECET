@@ -1,79 +1,94 @@
-# 🎓 SSBT College Mobile App — Multi-Theme Portal
+# 🎓 SSBT College Departmental System & Student Mobile Portal
 
-A modern, ultra-sleek mobile-first student web portal for **SSBT's College of Engineering & Technology, Bambhori, Jalgaon**, featuring an interactive introductory animation, full multi-view navigation, interactive college modals, and **10 curated design system themes** (including palettes directly sampled from the official SSBT emblem logo).
-
-🔗 **Live Website Demo (GitHub Pages):**  
-👉 **[https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/)**
-
-📱 **Official Android Mobile Application (.APK):**  
-- 📥 **Direct Download:** [Download `ssbt-college-app.apk` (13.1 MB)](apk/ssbt-college-app.apk)
-- 🌐 **GitHub Mirror:** [Download from GitHub Raw](https://github.com/swarupsonar2006-gif/departmental-system/raw/PIYUSH-UI-STUFF/apk/ssbt-college-app.apk)
-- 🌿 **Git Branch:** [`PIYUSH-UI-STUFF`](https://github.com/swarupsonar2006-gif/departmental-system/tree/PIYUSH-UI-STUFF)
-
-> **Install Note:** On Android devices, open the downloaded `.apk` and allow installation from unknown sources if prompted.
+> **Branch:** [`PIYUSH-UI-STUFF`](https://github.com/swarupsonar2006-gif/departmental-system/tree/PIYUSH-UI-STUFF) · **Maintainer:** Piyush Mali  
+> **Repository:** [swarupsonar2006-gif/departmental-system](https://github.com/swarupsonar2006-gif/departmental-system)
 
 ---
 
-## 🎨 Theme Showcases & Color Palettes
+## 📱 Mobile Quick Links (Tap to Open / Download)
 
-### 🌿 Official SSBT Logo Palettes
-1. **SSBT (Default Light):**
-   - Accent: `#74762F` (Olive Ring) · Soft: `#F1F2E3` · Text: `#171717` · Surface: `#FFFFFF`
-2. **Flame (Vibrant Orange Light):**
-   - Accent: `#B8611F` (Flame Orange) · Soft: `#FBEFE4` · Background: `#F7F7F5`
-3. **Brick (Deep Crimson Red Light):**
-   - Accent: `#AE4625` (Brick Red) · Soft: `#F8ECE7` · Background: `#F7F7F5`
-4. **Ink (Charcoal Minimal Light):**
-   - Accent: `#171717` (Deep Ink) · Soft: `#F0F0EE` · Background: `#F7F7F5`
-5. **Night (Olive & Gold Dark Mode):**
-   - Background: `#121211` · Surface: `#1B1B19` · Accent: `#C4C66C` · Gold: `#D8C847`
-6. **Ember (Flame Dark Mode):**
-   - Background: `#121211` · Surface: `#1B1B19` · Accent: `#E8955A` · Flame: `#E08A4E`
+Direct, working mobile links tested for Android phones and all mobile browsers:
 
-### 🏛️ Classic Academic & Department Palettes
-7. **Sapphire & Amber:**
-   - Navy: `#063A5D` · Ocean Blue: `#2364A0` · Amber: `#FEB913` · Flame: `#FE9237`
-8. **Crimson Rose:**
-   - Ruby Crimson: `#C4214A` · Vintage Mauve: `#AE5264` · Blush Pink: `#FCEEF1`
-9. **College Classic:**
-   - Olive Gold: `#807E12` · Deep Dark Olive: `#313007` · Parchment Cream: `#F7F7C9`
-10. **Bronze & Sand:**
-    - Deep Bronze: `#5E532B` · Warm Sand: `#EDE6D6` · Amber Ochre: `#C98A4B`
-11. **Auto Match Device:**
-    - Automatically syncs with the user's OS dark/light mode preference (`prefers-color-scheme`).
+| Action | One-Tap Mobile Direct Link | Description |
+|:---|:---|:---|
+| 🌐 **Live Web Portal** | **[👉 Open SSBT Mobile Web Portal (Live)](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/)** | Interactive responsive portal with timetable, attendance, digital ID & 10 themes |
+| 📥 **Direct APK Download** | **[👉 Download Android App APK (13.1 MB)](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/apk/ssbt-college-app.apk)** | Direct 1-tap download (Works on any mobile browser without login) |
+| ⚡ **GitHub CDN Mirror** | **[👉 Raw CDN Download Link](https://raw.githubusercontent.com/piyushmali61/FIRST-DEMO-THEMEE-PROJECET/main/apk/ssbt-college-app.apk)** | High-speed global GitHub raw content delivery mirror |
+| 📦 **In-Repo File** | **[👉 Browse `apk/ssbt-college-app.apk`](apk/ssbt-college-app.apk)** | Binary package stored inside this repository branch |
 
 ---
 
-## 🚀 Key Features
+## 📲 Easy 3-Step Phone Installation Guide
 
-- **💫 Animated Intro Sequence:**
-  - Orbiting comet / satellite trajectory with gradient trail.
-  - Floating 3D mortarboard tile with animated SVG line drawing.
-  - Real-time step progress with percentage counter.
-  - 5-segment glowing loading bar with golden shimmer sheen and completion wave.
-  - "Replay intro" button to preview the animation anytime.
-- **📱 Responsive Mobile Experience:**
-  - Desktop: Realistic mobile device preview frame with drop shadow and status bar clock.
-  - Mobile (≤ 480px): Edge-to-edge full-bleed native experience with safe-area insets.
-- **🧭 5 Complete Interactive Views:**
-  1. 🏠 **Home Dashboard:** Profile greeting, attendance meter, CGPA, 6 quick-access tiles, today's schedule, and upcoming events.
-  2. 📚 **Courses:** Semester VI Computer Engineering courses (Compiler Design, Data Science, Software Engg, Web Tech) with attendance & syllabus progress bars.
-  3. 🎉 **Events:** Filterable campus events (Technical Symposium, Mid-Sem Exams, Milestone Hackathon, Cultural Fest 'Vasant', Sports Meet 'Kshitij').
-  4. 📅 **Academic Calendar:** Interactive October 2026 calendar matrix with exam and milestone highlights.
-  5. 👤 **Student Profile:** Official Digital Student ID Card for Piyush Mali with PRN, Roll No, Branch, CGPA, barcode, and mentor contact.
-- **⚡ Interactive Modals & Drawers:**
-  - Subject-by-subject attendance details with exam eligibility badge.
-  - Weekly class timetable by hour and room number.
-  - Academic gradecard with SGPA breakdown for Sem I to Sem V.
-  - Term fees breakdown with pending balance and online payment gateway trigger.
-  - Central library book manager with due dates and one-tap renewal.
-  - Campus circulars and examination notifications.
-  - Slide-up bottom sheet for instant theme customization with live swatch previews.
+1. **Download:** Tap **[Download Android App APK](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/apk/ssbt-college-app.apk)** on your phone.
+2. **Chrome / Browser Prompt:** If your phone displays *"File might be harmful"* (standard Android warning for APKs outside Google Play), tap **"Download anyway"**.
+3. **Allow & Install:** Open your phone's notification bar or `Downloads` folder, tap `ssbt-college-app.apk`. If prompted:
+   - Tap **Settings** &rarr; toggle **ON** *"Allow from this source"* (Install unknown apps).
+   - Go back and tap **Install**.
+4. **Launch:** Tap **Open** to access SSBT College timetable, attendance, and student notices!
 
 ---
 
-## 💻 Tech Stack
-- **HTML5:** Semantic, accessible mobile structure
-- **Vanilla CSS3:** Custom CSS properties (tokens), responsive grid, micro-animations, glassmorphism
-- **Vanilla JavaScript (ES6+):** Zero dependencies, reactive state, `localStorage` persistence
-- **Hosting:** GitHub Pages (automatic deployment on push to `main`)
+## 💻 Web Portal & UI System
+
+This branch provides the complete, mobile-first responsive web portal for SSBT students and faculty, featuring an interactive intro animation, digital student ID, timetable, subject attendance, circulars, and a 10-theme color engine.
+
+### 🌐 Live Demo & Web App Files
+- **`index.html`** — Primary student portal interface with integrated mobile app download links and installation guide.
+- **`SSBT COET.html`** — Enhanced theme edition.
+- **`style.css`** & **`app.js`** — UI styling system and event handlers.
+- **`logo.jpg`** — Official SSBT emblem asset.
+
+### 🎨 10 Curated Theme Palettes (Sampled from Official SSBT Logo)
+1. **SSBT (Default Light):** Olive Ring (`#74762F`) · Soft (`#F1F2E3`) · Ink (`#171717`)
+2. **Flame (Vibrant Orange Light):** Flame Orange (`#B8611F`) · Soft (`#FBEFE4`)
+3. **Brick (Deep Crimson Red Light):** Brick Red (`#AE4625`) · Soft (`#F8ECE7`)
+4. **Ink (Charcoal Minimal Light):** Deep Ink (`#171717`) · Soft (`#F0F0EE`)
+5. **Night (Olive & Gold Dark Mode):** Background (`#121211`) · Accent (`#C4C66C`) · Gold (`#D8C847`)
+6. **Ember (Flame Dark Mode):** Background (`#121211`) · Accent (`#E8955A`) · Flame (`#E08A4E`)
+7. **Sapphire & Amber:** Navy (`#063A5D`) · Ocean Blue (`#2364A0`) · Amber (`#FEB913`)
+8. **Crimson Rose:** Ruby Crimson (`#C4214A`) · Blush Pink (`#FCEEF1`)
+9. **College Classic:** Olive Gold (`#807E12`) · Parchment (`#F7F7C9`)
+10. **Bronze & Sand:** Deep Bronze (`#5E532B`) · Warm Sand (`#EDE6D6`)
+
+---
+
+## 🛠️ Project Architecture
+
+```
+departmental-system/ (branch: PIYUSH-UI-STUFF)
+├── apk/
+│   └── ssbt-college-app.apk           # Compiled release Android application (13.1 MB)
+├── index.html                         # Student Mobile Portal UI with APK download links
+├── SSBT COET.html                     # Alternate portal template
+├── style.css                          # Design tokens & styles
+├── app.js                             # Client logic, theme engine & modals
+├── logo.jpg                           # Official SSBT logo
+├── ssbt-college-app/                  # Full-stack departmental application source
+│   ├── android/                       # Kotlin + Jetpack Compose Android app
+│   ├── api/                           # Node + TypeScript + Express + Prisma REST API
+│   └── docs/                          # Architecture & developer guides
+└── README.md                          # Project documentation
+```
+
+---
+
+## 🔨 Building the Android App from Source
+
+To build a fresh APK yourself using the Gradle wrapper:
+
+```bash
+cd ssbt-college-app/android
+./gradlew assembleDebug
+```
+
+The compiled APK will be generated at:
+`ssbt-college-app/android/app/build/outputs/apk/debug/app-debug.apk`
+
+---
+
+## 👥 Departmental System Team
+- **Swarup Sonar** — Repository Owner & Architecture Lead
+- **Piyush Mali** — UI / UX Design & Web Portal Engine (`PIYUSH-UI-STUFF`)
+- **Pratik Khobragade** — Android Jetpack Compose Screens (`Pratik_workspace`)
+- **Aayush Chaudhari** — Backend Services, APIs & Tests (`AAYUSH-WORK-BRANCH`)
