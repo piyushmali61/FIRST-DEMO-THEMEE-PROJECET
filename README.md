@@ -5,6 +5,13 @@ A modern, ultra-sleek mobile-first student web portal for **SSBT's College of En
 🔗 **Live Website Demo (GitHub Pages):**  
 👉 **[https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/)**
 
+📱 **Official Android Mobile Application (.APK):**  
+- 📥 **Direct Download:** [Download `ssbt-college-app.apk` (13.1 MB)](apk/ssbt-college-app.apk)
+- 🌐 **GitHub Mirror:** [Download from GitHub Raw](https://github.com/swarupsonar2006-gif/departmental-system/raw/PIYUSH-UI-STUFF/apk/ssbt-college-app.apk)
+- 🌿 **Git Branch:** [`PIYUSH-UI-STUFF`](https://github.com/swarupsonar2006-gif/departmental-system/tree/PIYUSH-UI-STUFF)
+
+> **Install Note:** On Android devices, open the downloaded `.apk` and allow installation from unknown sources if prompted.
+
 ---
 
 ## 🎨 Theme Showcases & Color Palettes
