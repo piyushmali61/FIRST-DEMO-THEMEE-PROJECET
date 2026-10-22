@@ -3375,7 +3375,8 @@
   applyTheme(saved());
   darkMQ.addEventListener?.("change", () => { if (!saved()) applyTheme(null); });
 
-  const openSheet  = () => device.classList.add("sheet-open");
+  window.openSheet = () => { toggleThemeSlider(true); switchTab("home"); };
+  const openSheet = window.openSheet;
   const closeSheet = () => device.classList.remove("sheet-open");
   
   document.getElementById("scrim")?.addEventListener("click", closeSheet);
