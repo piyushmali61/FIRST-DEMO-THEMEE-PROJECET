@@ -1,94 +1,91 @@
-# 🎓 SSBT College Departmental System & Student Mobile Portal
+# SSBT COET — Departmental System & Student Portal
 
-> **Branch:** [`PIYUSH-UI-STUFF`](https://github.com/swarupsonar2006-gif/departmental-system/tree/PIYUSH-UI-STUFF) · **Maintainer:** Piyush Mali  
-> **Repository:** [swarupsonar2006-gif/departmental-system](https://github.com/swarupsonar2006-gif/departmental-system)
-
----
-
-## 📱 Mobile Quick Links (Tap to Open / Download)
-
-Direct, working mobile links tested for Android phones and all mobile browsers:
-
-| Action | One-Tap Mobile Direct Link | Description |
-|:---|:---|:---|
-| 🌐 **Live Web Portal** | **[👉 Open SSBT Mobile Web Portal (Live)](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/)** | Interactive responsive portal with timetable, attendance, digital ID & 10 themes |
-| 📥 **Direct APK Download** | **[👉 Download Android App APK (13.1 MB)](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/apk/ssbt-college-app.apk)** | Direct 1-tap download (Works on any mobile browser without login) |
-| ⚡ **GitHub CDN Mirror** | **[👉 Raw CDN Download Link](https://raw.githubusercontent.com/piyushmali61/FIRST-DEMO-THEMEE-PROJECET/main/apk/ssbt-college-app.apk)** | High-speed global GitHub raw content delivery mirror |
-| 📦 **In-Repo File** | **[👉 Browse `apk/ssbt-college-app.apk`](apk/ssbt-college-app.apk)** | Binary package stored inside this repository branch |
+Official student portal and mobile application for the **Department of Computer Engineering, SSBT's College of Engineering & Technology, Bambhori, Jalgaon**.
 
 ---
 
-## 📲 Easy 3-Step Phone Installation Guide
+## 📱 1-Tap Android App Download
 
-1. **Download:** Tap **[Download Android App APK](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/apk/ssbt-college-app.apk)** on your phone.
-2. **Chrome / Browser Prompt:** If your phone displays *"File might be harmful"* (standard Android warning for APKs outside Google Play), tap **"Download anyway"**.
-3. **Allow & Install:** Open your phone's notification bar or `Downloads` folder, tap `ssbt-college-app.apk`. If prompted:
-   - Tap **Settings** &rarr; toggle **ON** *"Allow from this source"* (Install unknown apps).
-   - Go back and tap **Install**.
-4. **Launch:** Tap **Open** to access SSBT College timetable, attendance, and student notices!
+Get the official **SSBT College Android App** directly on your device:
 
----
+👉 **[Download SSBT College App APK (v2.4.0, ~13.6 MB)](apk/ssbt-college-app.apk)**
 
-## 💻 Web Portal & UI System
-
-This branch provides the complete, mobile-first responsive web portal for SSBT students and faculty, featuring an interactive intro animation, digital student ID, timetable, subject attendance, circulars, and a 10-theme color engine.
-
-### 🌐 Live Demo & Web App Files
-- **`index.html`** — Primary student portal interface with integrated mobile app download links and installation guide.
-- **`SSBT COET.html`** — Enhanced theme edition.
-- **`style.css`** & **`app.js`** — UI styling system and event handlers.
-- **`logo.jpg`** — Official SSBT emblem asset.
-
-### 🎨 10 Curated Theme Palettes (Sampled from Official SSBT Logo)
-1. **SSBT (Default Light):** Olive Ring (`#74762F`) · Soft (`#F1F2E3`) · Ink (`#171717`)
-2. **Flame (Vibrant Orange Light):** Flame Orange (`#B8611F`) · Soft (`#FBEFE4`)
-3. **Brick (Deep Crimson Red Light):** Brick Red (`#AE4625`) · Soft (`#F8ECE7`)
-4. **Ink (Charcoal Minimal Light):** Deep Ink (`#171717`) · Soft (`#F0F0EE`)
-5. **Night (Olive & Gold Dark Mode):** Background (`#121211`) · Accent (`#C4C66C`) · Gold (`#D8C847`)
-6. **Ember (Flame Dark Mode):** Background (`#121211`) · Accent (`#E8955A`) · Flame (`#E08A4E`)
-7. **Sapphire & Amber:** Navy (`#063A5D`) · Ocean Blue (`#2364A0`) · Amber (`#FEB913`)
-8. **Crimson Rose:** Ruby Crimson (`#C4214A`) · Blush Pink (`#FCEEF1`)
-9. **College Classic:** Olive Gold (`#807E12`) · Parchment (`#F7F7C9`)
-10. **Bronze & Sand:** Deep Bronze (`#5E532B`) · Warm Sand (`#EDE6D6`)
+- **Version**: 2.4.0 (Build 38)
+- **Minimum Android**: Android 8.0 (API 26) or higher
+- **Target Android**: Android 16 (API 36)
+- **Tech Stack**: 100% Jetpack Compose, Material 3, Kotlin Coroutines, Navigation Compose
 
 ---
 
-## 🛠️ Project Architecture
+## 🌐 Web Application Portal (Interactive Preview)
 
-```
-departmental-system/ (branch: PIYUSH-UI-STUFF)
-├── apk/
-│   └── ssbt-college-app.apk           # Compiled release Android application (13.1 MB)
-├── index.html                         # Student Mobile Portal UI with APK download links
-├── SSBT COET.html                     # Alternate portal template
-├── style.css                          # Design tokens & styles
-├── app.js                             # Client logic, theme engine & modals
-├── logo.jpg                           # Official SSBT logo
-├── ssbt-college-app/                  # Full-stack departmental application source
-│   ├── android/                       # Kotlin + Jetpack Compose Android app
-│   ├── api/                           # Node + TypeScript + Express + Prisma REST API
-│   └── docs/                          # Architecture & developer guides
-└── README.md                          # Project documentation
-```
+Open [`index.html`](index.html) or [`SSBT COET.html`](SSBT%20COET.html) directly in Google Chrome or any modern browser:
+
+- **Startup Intro Animation (`SplashScreen.kt` Replica)**:
+  - Orbiting satellite on dotted dashed ring with gradient flame trail.
+  - Floating graduation cap tile with smooth stroke-by-stroke SVG drawing.
+  - Real-time dynamic greeting (*Good Morning / Afternoon / Evening*).
+  - 5-bar progress segments filling from *Initializing* to *Ready*.
+  - Celebratory tile pop and fluid fade-in transition into the dashboard.
+  - **"Replay intro"** button to restart the animation at any time.
+- **Header & 10-Theme Inline Slider**:
+  - SSBT emblem inside circular olive ring.
+  - 6 Emblem Palettes: `SSBT`, `Flame`, `Brick`, `Ink`, `Night`, `Ember`.
+  - 4 Academic Palettes: `Sapphire`, `Rose`, `Classic`, `Bronze`.
+  - *Match device* system dark/light synchronization.
+- **Slide-in Navigation Drawer (`MenuDrawer.kt`)**:
+  - Quick links to Notes, Attendance, Results, Time Table, Syllabus, Faculty Contacts, Theme Switch, and APK Download.
+- **Student Profile & Quick Access**:
+  - Live academic statistics (Attendance 87.4%, CGPA 8.62, Backlogs 0).
+  - Interactive modals for subject notes, lecture schedule, and exam results.
 
 ---
 
-## 🔨 Building the Android App from Source
+## 🛠️ Opening the Android Project in Android Studio
 
-To build a fresh APK yourself using the Gradle wrapper:
+1. Launch **Android Studio**.
+2. Select **Open an Existing Project**.
+3. Choose the directory:
+   ```
+   ssbt-college-app/android
+   ```
+4. Allow Gradle to sync dependencies automatically.
+5. Select an emulator or connected device and click **Run (Shift + F10)**.
 
+To build the release/debug APK from the terminal:
 ```bash
 cd ssbt-college-app/android
 ./gradlew assembleDebug
 ```
-
 The compiled APK will be generated at:
-`ssbt-college-app/android/app/build/outputs/apk/debug/app-debug.apk`
+```
+ssbt-college-app/android/app/build/outputs/apk/debug/app-debug.apk
+```
 
 ---
 
-## 👥 Departmental System Team
-- **Swarup Sonar** — Repository Owner & Architecture Lead
-- **Piyush Mali** — UI / UX Design & Web Portal Engine (`PIYUSH-UI-STUFF`)
-- **Pratik Khobragade** — Android Jetpack Compose Screens (`Pratik_workspace`)
-- **Aayush Chaudhari** — Backend Services, APIs & Tests (`AAYUSH-WORK-BRANCH`)
+## 📂 Repository Structure
+
+```
+├── .gitignore
+├── README.md
+├── apk/
+│   └── ssbt-college-app.apk          # Prebuilt Android APK (~13.6 MB)
+├── index.html                        # Web application portal
+├── SSBT COET.html                    # Mirror web portal
+├── logo.png                          # Transparent squircle/circular college emblem
+├── logo.jpg                          # College emblem asset
+└── ssbt-college-app/
+    ├── README.md
+    ├── android/                      # Native Android Jetpack Compose app
+    │   ├── app/
+    │   │   ├── build.gradle.kts
+    │   │   └── src/main/java/edu/ssbt/collegeapp/
+    │   │       ├── MainActivity.kt
+    │   │       ├── core/design/      # Color.kt, Theme.kt, Type.kt, Motion.kt
+    │   │       └── feature/
+    │   │           ├── splash/       # SplashScreen.kt (Intro animation)
+    │   │           └── home/         # HomeScreen.kt, MenuDrawer.kt, ThemeSlider.kt
+    │   └── build.gradle.kts
+    └── api/                          # Backend services (Node.js & Prisma)
+```
