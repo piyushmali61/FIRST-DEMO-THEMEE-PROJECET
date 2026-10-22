@@ -8,7 +8,8 @@ Official student portal and mobile application for the **Department of Computer 
 
 Get the official **SSBT College Android App** directly on your device:
 
-👉 **[Download SSBT College App APK (v2.4.0, ~13.6 MB)](apk/ssbt-college-app.apk)**
+👉 **[Download SSBT College App APK (Direct Root)](ssbt-college-app.apk)** · **[Download via apk/ folder](apk/ssbt-college-app.apk)**
+👉 **[Live Web Demo & APK Download](https://piyushmali61.github.io/FIRST-DEMO-THEMEE-PROJECET/)**
 
 - **Version**: 2.4.0 (Build 38)
 - **Minimum Android**: Android 8.0 (API 26) or higher
