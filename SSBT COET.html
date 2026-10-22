@@ -1440,7 +1440,7 @@
 <div class="device" id="device">
 
   <!-- ===== Loader ===== -->
-  <div id="loader" role="status" aria-live="polite" aria-label="Loading">
+  <div id="loader" role="status" onclick="hideLoader()" style="cursor:pointer;" title="Tap to skip loading" aria-live="polite" aria-label="Loading">
     <div class="l-wrap">
       <div class="stage">
         <svg class="orbit" viewBox="0 0 210 210" aria-hidden="true">
@@ -3530,10 +3530,6 @@
   window.closeDrawer = () => {
     drawerScrimEl?.classList.remove('open');
   };
-
-  
-    openDrawer();
-  });
 
   document.getElementById('sliderMatchDeviceBtn')?.addEventListener('click', () => {
     store(null);
