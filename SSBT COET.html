@@ -1135,7 +1135,8 @@
   @keyframes wave { 50% { transform: translateY(-5px); } }
 
   /* App content eases in after the loader */
-  .app-in .content > * { animation: rise .6s var(--ease) both; }
+  .content > * { animation: rise .6s var(--ease) both; }
+  #loader { display: none !important; }
   @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
 
   /* ============ Real phones: drop the frame ============ */
@@ -1437,45 +1438,9 @@
 <body>
 
 <div>
-<div class="device" id="device">
+<div class="device app-in" id="device">
 
-  <!-- ===== Loader ===== -->
-  <div id="loader" role="status" onclick="hideLoader()" style="cursor:pointer;" title="Tap to skip loading" aria-live="polite" aria-label="Loading">
-    <div class="l-wrap">
-      <div class="stage">
-        <svg class="orbit" viewBox="0 0 210 210" aria-hidden="true">
-          <defs>
-            <linearGradient id="trail" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" style="stop-color:var(--flame)" stop-opacity="0" />
-              <stop offset="1" style="stop-color:var(--flame)" stop-opacity=".9" />
-            </linearGradient>
-          </defs>
-          <circle class="ring" cx="105" cy="105" r="100" />
-          <g class="spin">
-            <path class="sat-trail" d="M 34.3 34.3 A 100 100 0 0 1 105 5" />
-            <circle class="sat" cx="105" cy="5" r="4" />
-          </g>
-        </svg>
-        <div class="l-tile" id="lTile">
-          <svg class="mark" viewBox="0 0 120 100" aria-hidden="true">
-            <path class="board"  pathLength="1" d="M60 24 L112 44 L60 64 L8 44 Z" />
-            <path class="base"   pathLength="1" d="M30 54 V74 C42 84 78 84 90 74 V54" />
-            <path class="tassel" pathLength="1" d="M60 44 L98 52 V82" />
-            <circle class="knot" cx="98" cy="84" r="4" />
-          </svg>
-        </div>
-      </div>
-      <div class="l-greet"><span class="dot"></span><span class="js-greet">Welcome</span></div>
-      <div class="l-brand">SSBT COET</div>
-      <div class="l-row">
-        <span class="l-status" id="lStatus">Initializing</span>
-        <span class="l-pct" id="lPct">0%</span>
-      </div>
-      <div class="segments" id="segments">
-        <span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span>
-      </div>
-    </div>
-  </div>
+  
 
   <!-- ===== Status bar (frame preview only) ===== -->
   <div class="statusbar">
@@ -3434,76 +3399,6 @@
     applyTheme(null, true);
     showToast('Auto matching system theme', '⚙️');
   });
-
-  /* ---------- Loader ---------- */
-  const loader   = document.getElementById("loader");
-  const tile     = document.getElementById("lTile");
-  const statusEl = document.getElementById("lStatus");
-  const pct      = document.getElementById("lPct");
-  const segs     = [...document.querySelectorAll("#segments span")];
-
-  const steps = [
-    [0,  "Initializing"],
-    [18, "Fetching courses"],
-    [40, "Syncing timetable"],
-    [62, "Loading attendance"],
-    [82, "Updating results"],
-    [96, "Almost there"]
-  ];
-
-  let progress = 0, current = "", timer;
-
-  function setStatus(text) {
-    if (text === current) return;
-    current = text;
-    statusEl.classList.add("swap");
-    setTimeout(() => { statusEl.textContent = text; statusEl.classList.remove("swap"); }, 250);
-  }
-
-  function render() {
-    const p = Math.floor(progress);
-    pct.textContent = p + "%";
-    segs.forEach((s, i) => {
-      const local = Math.max(0, Math.min(1, (p - i * 20) / 20));
-      s.firstElementChild.style.width = local * 100 + "%";
-      s.classList.toggle("active", local > 0 && local < 1);
-    });
-    setStatus([...steps].reverse().find(s => p >= s[0])[1]);
-  }
-
-  function start() {
-    clearInterval(timer);
-    progress = 0; current = "";
-    statusEl.textContent = "Initializing";
-    device.classList.remove("app-in");
-    loader.classList.remove("done", "complete");
-    tile.classList.remove("pop");
-    render();
-    timer = setInterval(() => {
-      progress = Math.min(100, progress + Math.max(1.2, Math.random() * (100 - progress) * 0.12));
-      render();
-      if (progress >= 100) finish();
-    }, 110);
-  }
-
-  function finish() {
-    clearInterval(timer);
-    setTimeout(() => {
-      loader.classList.add("complete");
-      setStatus("Ready");
-      void tile.offsetWidth;
-      tile.classList.add("pop");
-    }, 200);
-    setTimeout(() => {
-      loader.classList.add("done");
-      device.classList.add("app-in");
-    }, 1000);
-  }
-
-  window.hideLoader = () => { progress = 100; render(); finish(); };
-
-  document.getElementById("replay")?.addEventListener("click", start);
-  start();
 
   /* ---------- Interactive Theme Slider & Side Drawer Functions ---------- */
   const themeSliderEl = document.getElementById('themeSlider');
