@@ -1,661 +1,799 @@
-// ============================================
-// SSBT College Mobile App - Interactive Logic
-// ============================================
+/**
+ * SSBT COET — Departmental System & Student Portal
+ * Complete JavaScript Engine powering the Web App Clone
+ * Synced with: SplashScreen.kt · HomeScreen.kt · ThemeSlider.kt · attendance.kt · MenuDrawer.kt
+ */
 
-document.addEventListener('DOMContentLoaded', () => {
+(function () {
+  'use strict';
 
-    // ---- 1. Status Bar Clock ----
-    function updateTime() {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const mins = now.getMinutes().toString().padStart(2, '0');
-        const timeEl = document.getElementById('statusTime');
-        if (timeEl) timeEl.textContent = `${hours}:${mins}`;
+  // ---------------------------------------------------------------------------
+  // 1. Data Store (SampleHome & SampleAttendanceData replica)
+  // ---------------------------------------------------------------------------
+  const studentData = {
+    name: "Piyush Pradeep Mali",
+    displayName: "Piyush Mali",
+    initials: "PM",
+    rollNo: "42",
+    prn: "72112345H",
+    branch: "B.Tech Computer Engineering",
+    programme: "B.Tech Computer Engg · T.Y. (Sem VI)",
+    semester: "Semester VI · Third Year",
+    academicYear: "2025-26",
+    division: "Division A",
+    batch: "Batch B2",
+    department: "Department of Computer Engineering",
+    lastUpdated: "22 Oct 2026 (Live Register)",
+    attendanceRate: 85.0,
+    cgpa: "8.65",
+    credits: "124"
+  };
+
+  const attendanceSubjects = [
+    {
+      code: "CS601",
+      name: "Compiler Design",
+      type: "Theory",
+      typeShort: "TH",
+      faculty: "Prof. M. V. Rawandale",
+      conducted: 42,
+      attended: 38
+    },
+    {
+      code: "CS602",
+      name: "Data Science & Artificial Intelligence",
+      type: "Theory",
+      typeShort: "TH",
+      faculty: "Prof. S. R. Suralkar",
+      conducted: 40,
+      attended: 35
+    },
+    {
+      code: "CS603",
+      name: "Software Engineering & Project Mgmt",
+      type: "Theory",
+      typeShort: "TH",
+      faculty: "Prof. A. T. Bhole",
+      conducted: 38,
+      attended: 33
+    },
+    {
+      code: "CS604",
+      name: "Cloud Computing & DevOps",
+      type: "Theory",
+      typeShort: "TH",
+      faculty: "Prof. D. U. Adokar",
+      conducted: 36,
+      attended: 29
+    },
+    {
+      code: "CS605",
+      name: "Cyber Security & Information Assurance",
+      type: "Theory",
+      typeShort: "TH",
+      faculty: "Prof. P. H. Zope",
+      conducted: 34,
+      attended: 24
+    },
+    {
+      code: "CS606L",
+      name: "Web Technology Laboratory",
+      type: "Practical",
+      typeShort: "PR",
+      faculty: "Prof. N. K. Patil",
+      conducted: 16,
+      attended: 15
+    },
+    {
+      code: "CS607L",
+      name: "Data Science & AI Laboratory",
+      type: "Practical",
+      typeShort: "PR",
+      faculty: "Prof. S. R. Suralkar",
+      conducted: 14,
+      attended: 13
     }
-    updateTime();
-    setInterval(updateTime, 30000);
+  ];
 
-    // ---- 2. Dynamic Greeting ----
-    function setGreeting() {
-        const hour = new Date().getHours();
-        const greetEl = document.getElementById('greeting');
-        if (greetEl) {
-            if (hour < 12) {
-                greetEl.textContent = 'Good Morning';
-            } else if (hour < 17) {
-                greetEl.textContent = 'Good Afternoon';
-            } else {
-                greetEl.textContent = 'Good Evening';
-            }
+  const themesConfig = [
+    { key: "ssbt", label: "SSBT", mode: "Light", isDark: false, bg: "#F7F7F5", surface: "#FFFFFF", accent: "#74762F", line: "#E8E8E3" },
+    { key: "flame", label: "Flame", mode: "Light", isDark: false, bg: "#F7F7F5", surface: "#FFFFFF", accent: "#B8611F", line: "#E8E8E3" },
+    { key: "brick", label: "Brick", mode: "Light", isDark: false, bg: "#F7F7F5", surface: "#FFFFFF", accent: "#AE4625", line: "#E8E8E3" },
+    { key: "ink", label: "Ink", mode: "Light", isDark: false, bg: "#F7F7F5", surface: "#FFFFFF", accent: "#171717", line: "#E8E8E3" },
+    { key: "night", label: "Night", mode: "Dark", isDark: true, bg: "#121211", surface: "#1B1B19", accent: "#C4C66C", line: "#2B2B28" },
+    { key: "ember", label: "Ember", mode: "Dark", isDark: true, bg: "#121211", surface: "#1B1B19", accent: "#E8955A", line: "#2B2B28" },
+    { key: "sapphire", label: "Sapphire", mode: "Light", isDark: false, bg: "#F4F6F9", surface: "#FFFFFF", accent: "#2364A0", line: "#DEE6EE" },
+    { key: "rose", label: "Rose", mode: "Light", isDark: false, bg: "#FAF5F6", surface: "#FFFFFF", accent: "#C4214A", line: "#F1E2E5" },
+    { key: "classic", label: "Classic", mode: "Light", isDark: false, bg: "#F7F7F5", surface: "#FFFFFF", accent: "#807E12", line: "#E8E8E3" },
+    { key: "bronze", label: "Bronze", mode: "Light", isDark: false, bg: "#F7F7F5", surface: "#FFFFFF", accent: "#5E532B", line: "#E8E8E3" }
+  ];
+
+  // ---------------------------------------------------------------------------
+  // 2. Greeting Helper (greetingForNow in Greeting.kt)
+  // ---------------------------------------------------------------------------
+  function getGreeting() {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good morning";
+    if (hour < 17) return "Good afternoon";
+    return "Good evening";
+  }
+
+  function updateGreetings() {
+    const greetingText = getGreeting().toUpperCase();
+    const elemSplash = document.getElementById("splashGreetingText");
+    const elemProfile = document.getElementById("profileGreetingText");
+    if (elemSplash) elemSplash.textContent = greetingText;
+    if (elemProfile) elemProfile.textContent = greetingText;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 3. Splash Screen Logic (rememberSplashProgress replica)
+  // ---------------------------------------------------------------------------
+  const splashSteps = [
+    { threshold: 0, label: "INITIALIZING" },
+    { threshold: 18, label: "FETCHING COURSES" },
+    { threshold: 40, label: "SYNCING TIMETABLE" },
+    { threshold: 62, label: "LOADING ATTENDANCE" },
+    { threshold: 82, label: "UPDATING RESULTS" },
+    { threshold: 96, label: "ALMOST THERE" },
+    { threshold: 100, label: "READY" }
+  ];
+
+  let splashProgress = 0;
+  let splashTimer = null;
+  let splashDone = false;
+
+  function runSplashProgress(onComplete) {
+    splashProgress = 0;
+    splashDone = false;
+    const overlay = document.getElementById("splashOverlay");
+    const content = document.getElementById("splashContent");
+    const tile = document.getElementById("splashTile");
+    const statusLbl = document.getElementById("splashStatusLabel");
+    const percentLbl = document.getElementById("splashPercentLabel");
+    const segments = [
+      document.getElementById("splashSeg0"),
+      document.getElementById("splashSeg1"),
+      document.getElementById("splashSeg2"),
+      document.getElementById("splashSeg3"),
+      document.getElementById("splashSeg4")
+    ];
+
+    if (overlay) {
+      overlay.classList.remove("hidden");
+    }
+    if (content) {
+      content.classList.remove("complete");
+    }
+    if (tile) {
+      tile.classList.remove("pop");
+    }
+
+    if (splashTimer) clearInterval(splashTimer);
+
+    splashTimer = setInterval(() => {
+      if (splashProgress < 100) {
+        // Increment mimicking Random.nextFloat() * (100 - raw) * 0.12f
+        const inc = Math.max(1.4, Math.random() * (100 - splashProgress) * 0.14);
+        splashProgress = Math.min(100, splashProgress + inc);
+        const intVal = Math.floor(splashProgress);
+
+        if (percentLbl) percentLbl.textContent = `${intVal}%`;
+
+        // Update status text
+        let curStatus = "INITIALIZING";
+        for (let i = splashSteps.length - 1; i >= 0; i--) {
+          if (intVal >= splashSteps[i].threshold) {
+            curStatus = splashSteps[i].label;
+            break;
+          }
         }
-    }
-    setGreeting();
-
-    // ---- 3. Side Menu Drawer ----
-    const menuBtn = document.getElementById('menuBtn');
-    const sideMenu = document.getElementById('sideMenu');
-    const menuOverlay = document.getElementById('menuOverlay');
-
-    function openMenu() {
-        sideMenu.classList.add('active');
-        menuOverlay.classList.add('active');
-        menuBtn.classList.add('active');
-    }
-
-    function closeMenu() {
-        sideMenu.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        menuBtn.classList.remove('active');
-    }
-
-    menuBtn.addEventListener('click', () => {
-        if (sideMenu.classList.contains('active')) {
-            closeMenu();
-        } else {
-            openMenu();
+        if (statusLbl && statusLbl.textContent !== curStatus) {
+          statusLbl.style.opacity = '0';
+          setTimeout(() => {
+            statusLbl.textContent = curStatus;
+            statusLbl.style.opacity = '1';
+          }, 120);
         }
+
+        // Fill 5 segments
+        segments.forEach((seg, idx) => {
+          if (!seg) return;
+          const fill = seg.querySelector(".splash-segment-fill");
+          const local = Math.max(0, Math.min(1, (splashProgress - idx * 20) / 20));
+          if (fill) fill.style.width = `${local * 100}%`;
+          if (local > 0 && local < 1) {
+            seg.classList.add("active");
+          } else {
+            seg.classList.remove("active");
+          }
+        });
+
+      } else {
+        clearInterval(splashTimer);
+        splashTimer = null;
+        if (percentLbl) percentLbl.textContent = "100%";
+        if (statusLbl) statusLbl.textContent = "READY";
+        if (content) content.classList.add("complete");
+        if (tile) tile.classList.add("pop");
+
+        // Wave effect across segments
+        segments.forEach((seg, idx) => {
+          if (!seg) return;
+          seg.classList.remove("active");
+          setTimeout(() => {
+            seg.classList.add("wave-lift");
+          }, idx * 60);
+        });
+
+        setTimeout(() => {
+          finishSplash(onComplete);
+        }, 950);
+      }
+    }, 110);
+  }
+
+  function finishSplash(callback) {
+    if (splashDone) return;
+    splashDone = true;
+    if (splashTimer) clearInterval(splashTimer);
+    const overlay = document.getElementById("splashOverlay");
+    if (overlay) {
+      overlay.classList.add("hidden");
+    }
+    if (typeof callback === "function") {
+      callback();
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 4. Multi-Theme Engine (Theme.kt & ThemeSlider.kt)
+  // ---------------------------------------------------------------------------
+  let currentThemeKey = localStorage.getItem("ssbt_theme_preference") || "ssbt";
+
+  function applyTheme(themeKey, persist = true) {
+    currentThemeKey = themeKey;
+    if (themeKey === "device") {
+      const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute("data-theme", isSystemDark ? "night" : "ssbt");
+      if (persist) localStorage.removeItem("ssbt_theme_preference");
+    } else {
+      document.documentElement.setAttribute("data-theme", themeKey);
+      if (persist) localStorage.setItem("ssbt_theme_preference", themeKey);
+    }
+    renderThemeChips();
+  }
+
+  function renderThemeChips() {
+    const container = document.getElementById("themeChipsScroll");
+    if (!container) return;
+    container.innerHTML = "";
+
+    const activeTheme = currentThemeKey === "device"
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" : "ssbt")
+      : currentThemeKey;
+
+    themesConfig.forEach(th => {
+      const chip = document.createElement("div");
+      chip.className = `theme-chip ${th.key === activeTheme ? 'selected' : ''}`;
+      chip.setAttribute("data-key", th.key);
+
+      chip.innerHTML = `
+        <div class="theme-mini-swatch" style="background: ${th.bg};">
+          <div class="theme-mini-row" style="background: ${th.surface};">
+            <div class="theme-mini-dot" style="background: ${th.accent};"></div>
+            <div class="theme-mini-bar" style="background: ${th.line};"></div>
+          </div>
+          <div class="theme-mini-sub-bar" style="background: ${th.accent};"></div>
+        </div>
+        <div class="theme-chip-label">${th.label}</div>
+        <div class="theme-chip-mode">${th.mode}</div>
+        ${th.key === activeTheme ? '<div class="theme-chip-check">✓</div>' : ''}
+      `;
+
+      chip.addEventListener("click", () => {
+        applyTheme(th.key);
+      });
+
+      container.appendChild(chip);
+    });
+  }
+
+  function toggleThemeSlider(open) {
+    const strip = document.getElementById("themeSliderStrip");
+    const btn = document.getElementById("headerThemeBtn");
+    if (!strip) return;
+    const isOpen = open !== undefined ? open : !strip.classList.contains("open");
+    if (isOpen) {
+      strip.classList.add("open");
+      if (btn) btn.classList.add("active");
+    } else {
+      strip.classList.remove("open");
+      if (btn) btn.classList.remove("active");
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 5. Navigation & Screen View Controller
+  // ---------------------------------------------------------------------------
+  function showScreen(screenId) {
+    const homeView = document.getElementById("homeScreenView");
+    const attendanceView = document.getElementById("attendanceScreenView");
+    const otherTabsContainer = document.getElementById("otherTabsContainer");
+
+    // Close any open drawer or slider
+    toggleMenuDrawer(false);
+    toggleThemeSlider(false);
+
+    if (screenId === "attendance") {
+      if (homeView) homeView.style.display = "none";
+      if (otherTabsContainer) otherTabsContainer.classList.remove("active");
+      if (attendanceView) {
+        attendanceView.classList.add("active");
+        attendanceView.scrollTop = 0;
+      }
+      window.location.hash = "attendance";
+      updateNavIndicator(null); // not one of bottom 5
+    } else {
+      if (attendanceView) attendanceView.classList.remove("active");
+      if (homeView) homeView.style.display = "flex";
+      if (otherTabsContainer) otherTabsContainer.classList.remove("active");
+      window.location.hash = "home";
+      updateNavIndicator("home");
+    }
+  }
+
+  function switchTab(tabKey) {
+    const homeView = document.getElementById("homeScreenView");
+    const attendanceView = document.getElementById("attendanceScreenView");
+    const otherTabs = document.getElementById("otherTabsContainer");
+    const tabTitle = document.getElementById("otherTabTitle");
+    const tabBody = document.getElementById("otherTabBody");
+
+    if (attendanceView) attendanceView.classList.remove("active");
+
+    if (tabKey === "home") {
+      if (homeView) homeView.style.display = "flex";
+      if (otherTabs) otherTabs.classList.remove("active");
+    } else if (tabKey === "profile") {
+      // Direct shortcut to Attendance / Student Profile
+      showScreen("attendance");
+      return;
+    } else {
+      if (homeView) homeView.style.display = "none";
+      if (otherTabs) {
+        otherTabs.classList.add("active");
+        renderTabContent(tabKey, tabTitle, tabBody);
+      }
+    }
+    updateNavIndicator(tabKey);
+  }
+
+  function updateNavIndicator(tabKey) {
+    const tabs = ["home", "courses", "events", "calendar", "profile"];
+    const buttons = document.querySelectorAll(".nav-tab-btn");
+    const indicator = document.getElementById("navIndicator");
+
+    buttons.forEach(btn => {
+      if (btn.getAttribute("data-tab") === tabKey) {
+        btn.classList.add("selected");
+      } else {
+        btn.classList.remove("selected");
+      }
     });
 
-    menuOverlay.addEventListener('click', closeMenu);
-
-    // Side menu item navigation
-    document.querySelectorAll('.side-menu-list li').forEach(item => {
-        item.addEventListener('click', () => {
-            document.querySelectorAll('.side-menu-list li').forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-
-            const targetNav = item.dataset.nav;
-            const targetAction = item.dataset.action;
-
-            if (targetNav) {
-                switchTab(targetNav);
-            } else if (targetAction) {
-                handleQuickAction('modal-' + targetAction);
-            }
-
-            setTimeout(closeMenu, 250);
-        });
-    });
-
-    // ---- 4. Notification Panel ----
-    const notifBtn = document.getElementById('notifBtn');
-    const notifPanel = document.getElementById('notifPanel');
-    const notifClose = document.getElementById('notifClose');
-
-    notifBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        notifPanel.classList.toggle('active');
-    });
-
-    notifClose.addEventListener('click', () => {
-        notifPanel.classList.remove('active');
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!notifPanel.contains(e.target) && !notifBtn.contains(e.target)) {
-            notifPanel.classList.remove('active');
-        }
-    });
-
-    document.querySelectorAll('.notif-item').forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.remove('unread');
-            const dot = item.querySelector('.notif-dot');
-            if (dot) dot.style.display = 'none';
-            updateNotifBadge();
-        });
-    });
-
-    function updateNotifBadge() {
-        const unreadCount = document.querySelectorAll('.notif-item.unread').length;
-        const badge = document.querySelector('.notif-badge');
-        if (badge) {
-            if (unreadCount === 0) {
-                badge.style.display = 'none';
-            } else {
-                badge.style.display = 'flex';
-                badge.textContent = unreadCount;
-            }
-        }
+    if (!indicator || !tabKey) {
+      if (indicator) indicator.style.display = "none";
+      return;
     }
 
-    // ---- 5. Multi-View Tab Navigation (6 Tabs) ----
-    const navItems = document.querySelectorAll('.nav-item');
-    const views = {
-        home: document.getElementById('viewHome'),
-        courses: document.getElementById('viewCourses'),
-        events: document.getElementById('viewEvents'),
-        calendar: document.getElementById('viewCalendar'),
-        profile: document.getElementById('viewProfile'),
-        help: document.getElementById('viewHelp')
-    };
-
-    function switchTab(tabName) {
-        // Update bottom nav
-        navItems.forEach(item => {
-            if (item.dataset.tab === tabName) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-
-        // Update side menu
-        document.querySelectorAll('.side-menu-list li').forEach(item => {
-            if (item.dataset.nav === tabName) {
-                item.classList.add('active');
-            } else if (item.dataset.nav) {
-                item.classList.remove('active');
-            }
-        });
-
-        // Switch views
-        Object.keys(views).forEach(key => {
-            if (views[key]) {
-                if (key === tabName) {
-                    views[key].classList.add('active');
-                } else {
-                    views[key].classList.remove('active');
-                }
-            }
-        });
-
-        // Scroll top smoothly
-        const mainContent = document.getElementById('mainContent');
-        if (mainContent) {
-            mainContent.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    indicator.style.display = "block";
+    const index = tabs.indexOf(tabKey);
+    if (index >= 0) {
+      const widthPct = 100 / tabs.length;
+      indicator.style.width = `22px`;
+      indicator.style.left = `calc(${index * widthPct + widthPct / 2}% - 11px)`;
     }
+  }
 
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            const tab = item.dataset.tab;
-            createRipple(item, e);
-            switchTab(tab);
-        });
-    });
+  function renderTabContent(tabKey, titleElem, bodyElem) {
+    if (!titleElem || !bodyElem) return;
 
-    // See all events button on Home
-    const seeAllEventsBtn = document.getElementById('seeAllEventsBtn');
-    if (seeAllEventsBtn) {
-        seeAllEventsBtn.addEventListener('click', () => switchTab('events'));
+    if (tabKey === "courses") {
+      titleElem.textContent = "Courses & Syllabus";
+      bodyElem.innerHTML = `
+        <div class="ssbt-card" style="padding: 18px;">
+          <div class="eyebrow" style="margin-bottom: 6px;">DEPARTMENT OF COMPUTER ENGG</div>
+          <div style="font-size: 16px; font-weight: 600; color: var(--ink);">Semester VI Course Modules</div>
+          <p style="font-size: 12px; color: var(--muted); margin-top: 4px;">Curriculum affiliated with KBC North Maharashtra University, Jalgaon</p>
+          <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">CS601 · Compiler Design</div>
+                <div class="modal-list-sub">Theory · 4 Credits · Prof. M. V. Rawandale</div>
+              </div>
+              <button class="modal-download-btn" onclick="window.appOpenModal('notesModal')">Syllabus</button>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">CS602 · Data Science & Artificial Intelligence</div>
+                <div class="modal-list-sub">Theory · 4 Credits · Prof. S. R. Suralkar</div>
+              </div>
+              <button class="modal-download-btn" onclick="window.appOpenModal('notesModal')">Syllabus</button>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">CS603 · Software Engineering & Project Mgmt</div>
+                <div class="modal-list-sub">Theory · 3 Credits · Prof. A. T. Bhole</div>
+              </div>
+              <button class="modal-download-btn" onclick="window.appOpenModal('notesModal')">Syllabus</button>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">CS606L · Web Technology Laboratory</div>
+                <div class="modal-list-sub">Practical · 2 Credits · Prof. N. K. Patil</div>
+              </div>
+              <button class="modal-download-btn" onclick="window.appOpenModal('notesModal')">Lab Manual</button>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (tabKey === "events") {
+      titleElem.textContent = "Campus Events & Circulars";
+      bodyElem.innerHTML = `
+        <div class="ssbt-card" style="padding: 18px;">
+          <div class="eyebrow" style="margin-bottom: 6px;">UPCOMING ACTIVITIES</div>
+          <div style="font-size: 16px; font-weight: 600; color: var(--ink);">Technical & Cultural Calendar 2025-26</div>
+          <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">Technical Symposium 2026</div>
+                <div class="modal-list-sub">22 Oct 2026 · Main Auditorium · 10:00 AM</div>
+              </div>
+              <span class="pill-badge">Registered</span>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">Mid-Semester Examinations</div>
+                <div class="modal-list-sub">28 Oct - 04 Nov 2026 · Academic Complex</div>
+              </div>
+              <span class="pill-badge" style="background: var(--red-soft); color: var(--red);">Exam</span>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">Annual Cultural Gathering "Milestone"</div>
+                <div class="modal-list-sub">12-14 Nov 2026 · Open Air Theatre</div>
+              </div>
+              <span class="pill-badge">Upcoming</span>
+            </div>
+          </div>
+        </div>
+      `;
+    } else if (tabKey === "calendar") {
+      titleElem.textContent = "Academic Schedule";
+      bodyElem.innerHTML = `
+        <div class="ssbt-card" style="padding: 18px;">
+          <div class="eyebrow" style="margin-bottom: 6px;">TERM SCHEDULE · 2025-26</div>
+          <div style="font-size: 16px; font-weight: 600; color: var(--ink);">Even Semester Milestones</div>
+          <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">Commencement of Classes</div>
+                <div class="modal-list-sub">Term II commenced on 05 January 2026</div>
+              </div>
+              <span class="pill-badge">Done</span>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">First Attendance Review & Defaulters List</div>
+                <div class="modal-list-sub">Compiled on 22 October 2026</div>
+              </div>
+              <span class="pill-badge">Active</span>
+            </div>
+            <div class="modal-list-item">
+              <div>
+                <div class="modal-list-title">Submission & End-Semester Examinations</div>
+                <div class="modal-list-sub">Tentative start: 15 December 2026</div>
+              </div>
+              <span class="pill-badge">Scheduled</span>
+            </div>
+          </div>
+        </div>
+      `;
     }
+  }
 
-    // Avatar click on welcome card opens Profile
-    const welcomeAvatarBtn = document.getElementById('welcomeAvatarBtn');
-    if (welcomeAvatarBtn) {
-        welcomeAvatarBtn.addEventListener('click', () => switchTab('profile'));
+  // ---------------------------------------------------------------------------
+  // 6. Slide-in Navigation Drawer (MenuDrawer.kt)
+  // ---------------------------------------------------------------------------
+  function toggleMenuDrawer(open) {
+    const backdrop = document.getElementById("drawerBackdrop");
+    if (!backdrop) return;
+    const isOpen = open !== undefined ? open : !backdrop.classList.contains("open");
+    if (isOpen) {
+      backdrop.classList.add("open");
+    } else {
+      backdrop.classList.remove("open");
     }
+  }
 
-    // App bar title area click takes back to Home
-    const appBarTitleArea = document.getElementById('appBarTitleArea');
-    if (appBarTitleArea) {
-        appBarTitleArea.addEventListener('click', () => switchTab('home'));
-        appBarTitleArea.style.cursor = 'pointer';
+  // ---------------------------------------------------------------------------
+  // 7. Modals Manager
+  // ---------------------------------------------------------------------------
+  function openModal(modalId) {
+    const overlay = document.getElementById(modalId);
+    if (overlay) {
+      overlay.classList.add("open");
     }
+  }
 
-    // ---- 6. Events Category Filter Chips ----
-    const filterChips = document.querySelectorAll('.filter-chips .chip');
-    const eventCardsLg = document.querySelectorAll('.event-card-lg');
-
-    filterChips.forEach(chip => {
-        chip.addEventListener('click', () => {
-            filterChips.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-
-            const filter = chip.dataset.filter;
-            eventCardsLg.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // ---- 7. Quick Access Modal Sheets ----
-    const modalOverlay = document.getElementById('quickModalOverlay');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalBody = document.getElementById('modalBody');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-
-    const modalData = {
-        'modal-attendance': {
-            title: 'Subject Attendance Details',
-            html: `
-                <p style="margin-bottom: 12px; color: var(--gold); font-weight: 600;">Overall Aggregate: 85.2% (Criteria: 75% Min)</p>
-                <table class="modal-table">
-                    <thead>
-                        <tr>
-                            <th>Subject</th>
-                            <th>Held</th>
-                            <th>Attended</th>
-                            <th>%</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>CS-601 Data Structures</td><td>40</td><td>36</td><td><strong style="color: #27ae60;">90%</strong></td></tr>
-                        <tr><td>CS-602 Operating Systems</td><td>38</td><td>30</td><td><strong style="color: #27ae60;">79%</strong></td></tr>
-                        <tr><td>CS-603 DBMS</td><td>36</td><td>33</td><td><strong style="color: #27ae60;">92%</strong></td></tr>
-                        <tr><td>CS-604 Networks & Security</td><td>40</td><td>32</td><td><strong style="color: #27ae60;">80%</strong></td></tr>
-                        <tr><td>CS-605 AI & Machine Learning</td><td>40</td><td>34</td><td><strong style="color: #27ae60;">85%</strong></td></tr>
-                    </tbody>
-                </table>
-                <div style="margin-top: 14px; text-align: center;">
-                    <button class="btn-block-terracotta" onclick="showToast('Attendance report exported to PDF!')">Export Attendance Report</button>
-                </div>
-            `
-        },
-        'modal-timetable': {
-            title: 'Weekly Lecture Schedule',
-            html: `
-                <p style="margin-bottom: 10px; font-weight: 600; color: var(--olive-dark);">Classroom: CS Block Room 301</p>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">09:00 AM - 10:00 AM</strong>
-                        <p style="font-size: 0.72rem; color: var(--text-secondary);">Advanced Data Structures & Algorithms • Prof. Sharma</p>
-                    </div>
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">10:15 AM - 11:15 AM</strong>
-                        <p style="font-size: 0.72rem; color: var(--text-secondary);">Operating Systems • Prof. Patel (Room 205)</p>
-                    </div>
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">11:30 AM - 12:30 PM</strong>
-                        <p style="font-size: 0.72rem; color: var(--text-secondary);">Computer Networks & Security • Prof. Deshmukh</p>
-                    </div>
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">02:00 PM - 04:00 PM</strong>
-                        <p style="font-size: 0.72rem; color: var(--text-secondary);">DBMS Hands-on Practical Lab • CS Lab 304</p>
-                    </div>
-                </div>
-                <button class="btn-block-terracotta" style="margin-top: 14px;" onclick="showToast('Class timetable saved to device!')">Download Timetable PDF</button>
-            `
-        },
-        'modal-results': {
-            title: 'Semester Grade Sheet',
-            html: `
-                <div style="background: rgba(254,146,55,0.08); padding: 12px; border-radius: 10px; margin-bottom: 12px; display: flex; justify-content: space-around;">
-                    <div><span style="font-size: 0.65rem; color: var(--text-muted);">SEMESTER V SGPA</span><br><strong style="font-size: 1.2rem; color: var(--gold);">8.80</strong></div>
-                    <div><span style="font-size: 0.65rem; color: var(--text-muted);">OVERALL CGPA</span><br><strong style="font-size: 1.2rem; color: var(--olive-dark);">8.65</strong></div>
-                    <div><span style="font-size: 0.65rem; color: var(--text-muted);">STATUS</span><br><strong style="font-size: 0.9rem; color: #27ae60;">Distinction</strong></div>
-                </div>
-                <table class="modal-table">
-                    <thead>
-                        <tr><th>Subject</th><th>Credits</th><th>Grade</th><th>Points</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Theory of Computation</td><td>4</td><td>O</td><td>10</td></tr>
-                        <tr><td>Database Management</td><td>4</td><td>A+</td><td>9</td></tr>
-                        <tr><td>Computer Networks</td><td>4</td><td>A</td><td>8</td></tr>
-                        <tr><td>Software Engineering</td><td>3</td><td>A+</td><td>9</td></tr>
-                        <tr><td>DBMS Lab & Mini Project</td><td>2</td><td>O</td><td>10</td></tr>
-                    </tbody>
-                </table>
-                <button class="btn-block-terracotta" style="margin-top: 14px;" onclick="showToast('Official Grade Card downloaded!')">Download Official Grade Card</button>
-            `
-        },
-        'modal-fees': {
-            title: 'College Fee Summary',
-            html: `
-                <div style="background: #f4f8fa; padding: 14px; border-radius: 12px; border: 1px solid rgba(254,146,55,0.15); margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>Tuition & Development Fee:</span>
-                        <strong style="color: #27ae60;">₹81,000 (Paid)</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>Gymkhana & Library Deposit:</span>
-                        <strong style="color: #27ae60;">₹2,500 (Paid)</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-                        <span>Winter Exam & Viva Fee:</span>
-                        <strong style="color: #e74c3c;">₹2,500 (Due Oct 30)</strong>
-                    </div>
-                    <hr style="border: none; border-top: 1px dashed rgba(254,146,55,0.2); margin: 8px 0;">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
-                        <strong>Total Outstanding Due:</strong>
-                        <strong style="color: var(--gold); font-size: 1rem;">₹2,500</strong>
-                    </div>
-                </div>
-                <button class="btn-block-terracotta" onclick="showToast('Redirecting to SBI Collect Payment Gateway...')">Pay Pending Fees Online</button>
-            `
-        },
-        'modal-library': {
-            title: 'Central Library Account',
-            html: `
-                <p style="margin-bottom: 10px; color: var(--gold); font-weight: 600;">Library Card: SSBT-LIB-2022-42</p>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="padding: 10px; background: #ffffff; border: 1px solid rgba(254,146,55,0.15); border-radius: 8px;">
-                        <strong style="color: var(--olive-dark);">1. Operating System Concepts (Silberschatz)</strong>
-                        <p style="font-size: 0.7rem; color: var(--text-secondary); margin: 2px 0 4px;">Acc No: CS-8841 • Issued on: 01 Oct 2026</p>
-                        <span style="font-size: 0.65rem; color: #FE9237; font-weight: 700;">Due in 4 days (19 Oct 2026)</span>
-                        <button class="btn-outline-sm" style="float: right; padding: 2px 8px; font-size: 0.65rem;" onclick="showToast('Book renewed for 14 days!')">Renew</button>
-                    </div>
-                    <div style="padding: 10px; background: #ffffff; border: 1px solid rgba(254,146,55,0.15); border-radius: 8px;">
-                        <strong style="color: var(--olive-dark);">2. Introduction to Algorithms (CLRS)</strong>
-                        <p style="font-size: 0.7rem; color: var(--text-secondary); margin: 2px 0 4px;">Acc No: CS-9402 • Issued on: 08 Oct 2026</p>
-                        <span style="font-size: 0.65rem; color: #27ae60; font-weight: 700;">Due in 11 days (26 Oct 2026)</span>
-                        <button class="btn-outline-sm" style="float: right; padding: 2px 8px; font-size: 0.65rem;" onclick="showToast('Book renewed for 14 days!')">Renew</button>
-                    </div>
-                </div>
-                <button class="btn-block-terracotta" style="margin-top: 14px;" onclick="showToast('Opening Web-OPAC Book Search...')">Search Library Catalog</button>
-            `
-        },
-        'modal-notices': {
-            title: 'Campus Circulars & Notices',
-            html: `
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">Winter 2026 Examination Form Submission</strong>
-                        <p style="font-size: 0.7rem; color: var(--text-secondary);">Last date to verify subject codes and submit exam forms online is Oct 25, 2026.</p>
-                        <button class="btn-outline-sm" style="margin-top: 4px; padding: 2px 8px; font-size: 0.65rem;" onclick="showToast('Exam circular downloaded')">Download Circular</button>
-                    </div>
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">Campus Placement Drive - TCS Ninja & Digital</strong>
-                        <p style="font-size: 0.7rem; color: var(--text-secondary);">Eligible B.Tech final and pre-final students register on T&P cell portal before Oct 22.</p>
-                        <button class="btn-outline-sm" style="margin-top: 4px; padding: 2px 8px; font-size: 0.65rem;" onclick="showToast('Placement guidelines downloaded')">View Eligibility</button>
-                    </div>
-                    <div style="padding: 10px; background: #f4f8fa; border-radius: 8px; border-left: 3px solid var(--gold);">
-                        <strong style="color: var(--olive-dark);">Hostel Gate Timing & Mess Schedule</strong>
-                        <p style="font-size: 0.7rem; color: var(--text-secondary);">Revised winter entry timings effective from Nov 01, 2026.</p>
-                        <button class="btn-outline-sm" style="margin-top: 4px; padding: 2px 8px; font-size: 0.65rem;" onclick="showToast('Hostel circular downloaded')">Download PDF</button>
-                    </div>
-                </div>
-            `
-        },
-        'modal-admissions': {
-            title: 'SSBT Admissions 2026-27',
-            html: `
-                <p style="margin-bottom: 12px; line-height: 1.4;">Admissions for First Year B.Tech, Direct Second Year (DSE), M.Tech, and MBA programmes are open via Centralized Admission Process (CAP).</p>
-                <div style="background: rgba(254,146,55,0.1); padding: 12px; border-radius: 8px; margin-bottom: 14px;">
-                    <p style="font-size: 0.72rem; color: var(--olive-dark);"><strong>DTE College Code:</strong> 5104</p>
-                    <p style="font-size: 0.72rem; color: var(--olive-dark);"><strong>Admission Office:</strong> +91 257 2258391 / 92</p>
-                </div>
-                <button class="btn-block-terracotta" onclick="showToast('Admission prospectus downloaded!')">Download Prospectus 2026-27</button>
-            `
-        },
-        'modal-settings': {
-            title: 'App Settings',
-            html: `
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(254,146,55,0.1);">
-                        <span>Push Notifications</span>
-                        <input type="checkbox" checked style="accent-color: var(--gold);">
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(254,146,55,0.1);">
-                        <span>Offline Mode Cache</span>
-                        <input type="checkbox" checked style="accent-color: var(--gold);">
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(254,146,55,0.1);">
-                        <span>Biometric Fingerprint Login</span>
-                        <input type="checkbox" checked style="accent-color: var(--gold);">
-                    </div>
-                </div>
-                <button class="btn-block-terracotta" style="margin-top: 16px;" onclick="showToast('Settings saved successfully!'); closeModal();">Save Preferences</button>
-            `
-        },
-        'modal-logout': {
-            title: 'Sign Out',
-            html: `
-                <p style="margin-bottom: 16px; text-align: center;">Are you sure you want to log out of SSBT Student Portal?</p>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn-outline-sm" style="flex: 1; text-align: center;" onclick="closeModal()">Cancel</button>
-                    <button class="btn-solid-sm" style="flex: 1; background: #e74c3c; border-color: #e74c3c;" onclick="showToast('Logged out successfully'); closeModal();">Log Out</button>
-                </div>
-            `
-        }
-    };
-
-    function openModal(actionKey) {
-        const data = modalData[actionKey];
-        if (data && modalTitle && modalBody && modalOverlay) {
-            modalTitle.textContent = data.title;
-            modalBody.innerHTML = data.html;
-            modalOverlay.classList.add('active');
-        }
+  function closeModal(modalId) {
+    if (modalId) {
+      const overlay = document.getElementById(modalId);
+      if (overlay) overlay.classList.remove("open");
+    } else {
+      document.querySelectorAll(".modal-overlay").forEach(m => m.classList.remove("open"));
     }
+  }
 
-    function closeModal() {
-        if (modalOverlay) {
-            modalOverlay.classList.remove('active');
-        }
-    }
+  // Export functions globally so inline HTML onclick handlers can trigger them
+  window.appOpenModal = openModal;
+  window.appCloseModal = closeModal;
+  window.appShowScreen = showScreen;
 
-    window.closeModal = closeModal;
+  // ---------------------------------------------------------------------------
+  // 8. Attendance Register Rendering & Excel Export
+  // ---------------------------------------------------------------------------
+  let currentSubjectFilter = "all";
 
-    if (modalCloseBtn) {
-        modalCloseBtn.addEventListener('click', closeModal);
-    }
+  function renderAttendanceCards(filter = "all") {
+    currentSubjectFilter = filter;
+    const container = document.getElementById("subjectCardsContainer");
+    if (!container) return;
+    container.innerHTML = "";
 
-    if (modalOverlay) {
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-    }
+    let list = attendanceSubjects;
+    if (filter === "theory") list = attendanceSubjects.filter(s => s.type === "Theory");
+    if (filter === "practical") list = attendanceSubjects.filter(s => s.type === "Practical");
+    if (filter === "critical") list = attendanceSubjects.filter(s => (s.attended / s.conducted * 100) < 75);
 
-    function handleQuickAction(action) {
-        if (modalData[action]) {
-            openModal(action);
-        } else {
-            showToast(`Opening ${action.replace('modal-', '')}...`);
-        }
-    }
+    list.forEach(sub => {
+      const pct = (sub.attended / sub.conducted * 100).toFixed(1);
+      const isCritical = pct < 75;
 
-    // Dashboard card clicks
-    document.querySelectorAll('.dash-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            createRipple(this, e);
-            const action = this.dataset.action;
-            if (action) {
-                handleQuickAction(action);
-            }
-        });
-    });
+      // Calculate margin info matching attendance.kt
+      let marginText = "";
+      if (pct >= 75) {
+        const canMiss = Math.floor((sub.attended / 0.75) - sub.conducted);
+        marginText = canMiss > 0 ? `Can safely miss ${canMiss} class${canMiss > 1 ? 'es' : ''}` : "On the 75% boundary threshold";
+      } else {
+        const needed = Math.ceil((0.75 * sub.conducted - sub.attended) / 0.25);
+        marginText = `Must attend next ${needed} class${needed > 1 ? 'es' : ''} to reach 75%`;
+      }
 
-    // Welcome stat item clicks
-    const statAttendance = document.getElementById('statAttendance');
-    if (statAttendance) statAttendance.addEventListener('click', () => openModal('modal-attendance'));
-
-    const statGpa = document.getElementById('statGpa');
-    if (statGpa) statGpa.addEventListener('click', () => openModal('modal-results'));
-
-    const statCredits = document.getElementById('statCredits');
-    if (statCredits) statCredits.addEventListener('click', () => openModal('modal-results'));
-
-    // ---- 8. Toast Notification Utility ----
-    const toastBubble = document.getElementById('toastBubble');
-    let toastTimeout;
-
-    function showToast(message) {
-        if (!toastBubble) return;
-        toastBubble.textContent = message;
-        toastBubble.classList.add('show');
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-            toastBubble.classList.remove('show');
-        }, 2600);
-    }
-    window.showToast = showToast;
-
-    // Generic button toast bindings (e.g. data-toast)
-    document.addEventListener('click', (e) => {
-        const toastBtn = e.target.closest('[data-toast]');
-        if (toastBtn) {
-            const msg = toastBtn.getAttribute('data-toast');
-            showToast(msg);
-        }
-
-        // Tap to copy helpline
-        const copyCard = e.target.closest('[data-copy]');
-        if (copyCard) {
-            const textToCopy = copyCard.getAttribute('data-copy');
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(textToCopy);
-            }
-            showToast(`Copied to clipboard: ${textToCopy}`);
-        }
-    });
-
-    // Support Form submit
-    const supportForm = document.getElementById('supportForm');
-    if (supportForm) {
-        supportForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const cat = document.getElementById('ticketCategory').value;
-            const ticketId = 'TCK-' + Math.floor(100000 + Math.random() * 900000);
-            showToast(`Ticket #${ticketId} submitted for ${cat}!`);
-            supportForm.reset();
-        });
-    }
-
-    // ---- 9. Touch Ripple Effect ----
-    function createRipple(element, event) {
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        const rect = element.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (event.clientX - rect.left - size / 2) + 'px';
-        ripple.style.top = (event.clientY - rect.top - size / 2) + 'px';
-        element.style.position = 'relative';
-        element.style.overflow = 'hidden';
-        element.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-    }
-
-        // ---- 10. Multi-Theme Switcher (6 Full Curated Themes) ----
-    const themeMetadata = {
-        default: {
-            name: 'Navy & Amber',
-            currentIcon: '🎨',
-            toast: '🎨 Switched to Default Theme (Navy & Amber)!'
-        },
-        college: {
-            name: 'College Theme',
-            currentIcon: '🏛️',
-            toast: '🏛️ Switched to College Theme (Olive & Gold)!'
-        },
-        college2: {
-            name: 'College Theme 2',
-            currentIcon: '🎓',
-            toast: '🎓 Switched to College Theme 2 (Olive Bronze & Warm Sand)!'
-        },
-        rose: {
-            name: 'Crimson Rose',
-            currentIcon: '🌹',
-            toast: '🌹 Switched to Crimson Rose Theme (Ruby & Blush)!'
-        },
-        dark: {
-            name: 'Pratik Mode',
-            currentIcon: '🌙',
-            toast: '🌙 Switched to Pratik Mode (Dark College & Cream)!'
-        },
-        dark2: {
-            name: 'College Dark 2',
-            currentIcon: '🌘',
-            toast: '🌘 Switched to College Dark 2 (Charcoal & Amber Ochre)!'
-        }
-    };
-
-    const themeCycle = ['default', 'college', 'college2', 'rose', 'dark', 'dark2'];
-
-    function applyTheme(themeName, showFeedback = false) {
-        if (!themeMetadata[themeName]) themeName = 'default';
-
-        document.documentElement.setAttribute('data-theme', themeName);
-        document.body.setAttribute('data-theme', themeName);
+      const card = document.createElement("div");
+      card.className = "ssbt-card subject-card";
+      card.innerHTML = `
+        <div class="subject-top-row">
+          <div class="subject-code-type">
+            <span class="subject-code">${sub.code}</span>
+            <span class="subject-type-badge">${sub.type}</span>
+          </div>
+          <div class="subject-percent-badge ${isCritical ? 'critical' : ''}">${pct}%</div>
+        </div>
+        <div class="subject-name">${sub.name}</div>
+        <div class="subject-faculty">${sub.faculty}</div>
         
-        const frame = document.querySelector('.mobile-frame');
-        if (frame) frame.setAttribute('data-theme', themeName);
+        <div class="bar-track" style="margin-top: 4px;">
+          <div class="bar-fill ${isCritical ? 'gold' : ''}" style="width: ${pct}%; ${isCritical ? 'background: var(--red);' : ''}"></div>
+        </div>
 
-        document.body.classList.remove('theme-college', 'theme-college2', 'theme-rose', 'theme-dark', 'theme-dark2');
-        if (themeName === 'college') {
-            document.body.classList.add('theme-college');
-        } else if (themeName === 'college2') {
-            document.body.classList.add('theme-college2');
-        } else if (themeName === 'rose') {
-            document.body.classList.add('theme-rose');
-        } else if (themeName === 'dark') {
-            document.body.classList.add('theme-dark');
-        } else if (themeName === 'dark2') {
-            document.body.classList.add('theme-dark2');
-        }
+        <div class="subject-counts-row">
+          <span>Attended: <strong>${sub.attended}</strong> / ${sub.conducted} sessions</span>
+          <span style="color: ${isCritical ? 'var(--red)' : 'var(--olive)'}; font-weight: 600;">
+            ${isCritical ? 'Shortage (<75%)' : 'On Track'}
+          </span>
+        </div>
 
-        try {
-            localStorage.setItem('ssbt_app_theme', themeName);
-        } catch (err) {
-            console.warn('Storage not accessible', err);
-        }
+        <div class="subject-margin-pill ${isCritical ? 'critical' : ''}">
+          ${marginText}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
 
-        // Synchronize all theme toggle buttons
-        document.querySelectorAll('[data-theme-val]').forEach(btn => {
-            if (btn.getAttribute('data-theme-val') === themeName) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
+  function renderExcelTable() {
+    const tbody = document.getElementById("excelTableBody");
+    if (!tbody) return;
+    tbody.innerHTML = "";
 
-        // Quick toggle icon in header
-        const quickBtn = document.getElementById('themeSwitchQuickBtn');
-        if (quickBtn) {
-            const currentMeta = themeMetadata[themeName];
-            const currentIndex = themeCycle.indexOf(themeName);
-            const nextIndex = (currentIndex + 1) % themeCycle.length;
-            const nextTheme = themeCycle[nextIndex];
-            const nextMeta = themeMetadata[nextTheme];
+    attendanceSubjects.forEach((sub, idx) => {
+      const pct = (sub.attended / sub.conducted * 100).toFixed(1);
+      const status = pct >= 75 ? "Regular" : "Defaulter";
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${idx + 1}</td>
+        <td><strong>${sub.code}</strong></td>
+        <td>${sub.name}</td>
+        <td>${sub.type}</td>
+        <td>${sub.faculty}</td>
+        <td>${sub.conducted}</td>
+        <td>${sub.attended}</td>
+        <td>${sub.conducted - sub.attended}</td>
+        <td><strong>${pct}%</strong></td>
+        <td style="color: ${pct >= 75 ? 'var(--olive)' : 'var(--red)'}; font-weight: 600;">${status}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
 
-            quickBtn.innerHTML = currentMeta.currentIcon;
-            quickBtn.setAttribute('title', `Current: ${currentMeta.name} (Click for ${nextMeta.name})`);
-        }
-
-        if (showFeedback && themeMetadata[themeName]) {
-            showToast(themeMetadata[themeName].toast);
-        }
-    }
-
-    // Expose globally
-    window.setAppTheme = applyTheme;
-
-    // Load initial persisted theme
-    const savedTheme = (function() {
-        try {
-            return localStorage.getItem('ssbt_app_theme') || 'default';
-        } catch(e) {
-            return 'default';
-        }
-    })();
-    applyTheme(savedTheme, false);
-
-    // Event listeners for theme buttons (Side menu & Profile)
-    document.addEventListener('click', (e) => {
-        const themeBtn = e.target.closest('[data-theme-val]');
-        if (themeBtn) {
-            const val = themeBtn.getAttribute('data-theme-val');
-            applyTheme(val, true);
-        }
+  function downloadCSV() {
+    let csv = "Sr No,Subject Code,Subject Name,Type,Faculty,Conducted,Attended,Absent,Percentage,Status\n";
+    attendanceSubjects.forEach((sub, idx) => {
+      const pct = (sub.attended / sub.conducted * 100).toFixed(1);
+      const status = pct >= 75 ? "Regular" : "Defaulter";
+      csv += `"${idx + 1}","${sub.code}","${sub.name}","${sub.type}","${sub.faculty}",${sub.conducted},${sub.attended},${sub.conducted - sub.attended},"${pct}%","${status}"\n`;
     });
 
-    // Quick toggle button in header
-    const quickThemeBtn = document.getElementById('themeSwitchQuickBtn');
-    if (quickThemeBtn) {
-        quickThemeBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'default';
-            const currentIndex = themeCycle.indexOf(currentTheme);
-            const nextIndex = (currentIndex + 1) % themeCycle.length;
-            applyTheme(themeCycle[nextIndex], true);
-        });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute("download", `SSBT_COET_Attendance_Register_${studentData.rollNo}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // ---------------------------------------------------------------------------
+  // 9. Event Listeners Initialization
+  // ---------------------------------------------------------------------------
+  document.addEventListener("DOMContentLoaded", () => {
+    updateGreetings();
+    applyTheme(currentThemeKey, false);
+
+    // Initial Progress run
+    runSplashProgress();
+
+    // Skip Intro
+    const skipBtn = document.getElementById("splashSkipBtn");
+    if (skipBtn) {
+      skipBtn.addEventListener("click", () => finishSplash());
     }
 
-    // Escape key closes modals and drawers
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeMenu();
-            if (notifPanel) notifPanel.classList.remove('active');
-            closeModal();
-        }
+    // Replay Intro Buttons
+    const replayButtons = document.querySelectorAll(".replay-splash-trigger");
+    replayButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        toggleMenuDrawer(false);
+        runSplashProgress();
+      });
     });
 
-    console.log('%c🎓 SSBT College App Ready with Multi-Theme Engine (Default + College Theme)!', 
-        'color: #A19E17; font-size: 14px; font-weight: bold; background: #313007; padding: 8px 16px; border-radius: 8px; border: 1px solid #A19E17;');
-});
+    // Theme Slider Toggle Button
+    const headerThemeBtn = document.getElementById("headerThemeBtn");
+    if (headerThemeBtn) {
+      headerThemeBtn.addEventListener("click", () => toggleThemeSlider());
+    }
+
+    // Match Device Button in Theme Slider
+    const matchDeviceBtn = document.getElementById("matchDeviceBtn");
+    if (matchDeviceBtn) {
+      matchDeviceBtn.addEventListener("click", () => applyTheme("device"));
+    }
+
+    // Drawer Toggle
+    const menuBtn = document.getElementById("headerMenuBtn");
+    if (menuBtn) {
+      menuBtn.addEventListener("click", () => toggleMenuDrawer(true));
+    }
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    if (drawerBackdrop) {
+      drawerBackdrop.addEventListener("click", (e) => {
+        if (e.target === drawerBackdrop) toggleMenuDrawer(false);
+      });
+    }
+
+    // Notifications Button
+    const notifBtn = document.getElementById("headerNotifBtn");
+    if (notifBtn) {
+      notifBtn.addEventListener("click", () => openModal("notifModal"));
+    }
+
+    // Bottom Navigation Buttons
+    const navButtons = document.querySelectorAll(".nav-tab-btn");
+    navButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tab = btn.getAttribute("data-tab");
+        switchTab(tab);
+      });
+    });
+
+    // Quick Access Grid Action Clicks
+    const tileAttendance = document.getElementById("tileAttendance");
+    if (tileAttendance) {
+      tileAttendance.addEventListener("click", () => showScreen("attendance"));
+    }
+    const tileNotes = document.getElementById("tileNotes");
+    if (tileNotes) {
+      tileNotes.addEventListener("click", () => openModal("notesModal"));
+    }
+    const tileResults = document.getElementById("tileResults");
+    if (tileResults) {
+      tileResults.addEventListener("click", () => openModal("resultsModal"));
+    }
+    const tileTimetable = document.getElementById("tileTimetable");
+    if (tileTimetable) {
+      tileTimetable.addEventListener("click", () => openModal("timetableModal"));
+    }
+    const tileSyllabus = document.getElementById("tileSyllabus");
+    if (tileSyllabus) {
+      tileSyllabus.addEventListener("click", () => openModal("syllabusModal"));
+    }
+    const tileFaculty = document.getElementById("tileFaculty");
+    if (tileFaculty) {
+      tileFaculty.addEventListener("click", () => openModal("facultyModal"));
+    }
+
+    // Attendance Screen Back Button
+    const attendanceBackBtn = document.getElementById("attendanceBackBtn");
+    if (attendanceBackBtn) {
+      attendanceBackBtn.addEventListener("click", () => showScreen("home"));
+    }
+
+    // Attendance Filter Pills
+    const filterButtons = document.querySelectorAll(".filter-pill-btn");
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const filter = btn.getAttribute("data-filter");
+        renderAttendanceCards(filter);
+      });
+    });
+
+    // Excel View Modal Button
+    const excelViewBtn = document.getElementById("excelViewBtn");
+    if (excelViewBtn) {
+      excelViewBtn.addEventListener("click", () => {
+        renderExcelTable();
+        openModal("excelModal");
+      });
+    }
+
+    // Download CSV Button
+    const downloadCsvBtn = document.getElementById("downloadCsvBtn");
+    if (downloadCsvBtn) {
+      downloadCsvBtn.addEventListener("click", downloadCSV);
+    }
+
+    // Close Modals on Scrim Click
+    document.querySelectorAll(".modal-overlay").forEach(overlay => {
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) overlay.classList.remove("open");
+      });
+    });
+
+    // Desktop Layout Toggle (Wide vs Phone)
+    const toggleLayoutBtn = document.getElementById("toggleLayoutBtn");
+    if (toggleLayoutBtn) {
+      toggleLayoutBtn.addEventListener("click", () => {
+        document.body.classList.toggle("wide-mode");
+        const isWide = document.body.classList.contains("wide-mode");
+        toggleLayoutBtn.innerHTML = isWide
+          ? `<span>📱</span><span>Phone Frame</span>`
+          : `<span>💻</span><span>Wide View</span>`;
+      });
+    }
+
+    // Render initial attendance cards
+    renderAttendanceCards();
+
+    // Check URL hash for direct links (e.g. #attendance)
+    if (window.location.hash === "#attendance") {
+      showScreen("attendance");
+    }
+  });
+
+})();
