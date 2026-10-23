@@ -188,23 +188,27 @@
           <div class="profile-avatar">PM</div>
         </div>
 
-        <div class="profile-stats-row">
-          <div class="profile-stat-box" style="cursor: pointer;" onclick="window.appShowScreen('attendance')">
-            <div class="profile-stat-val" style="color: var(--accent);">85%</div>
-            <div class="profile-stat-lbl">Attendance</div>
-            <div class="profile-stat-bar">
-              <div class="profile-stat-bar-fill" style="width: 85%;"></div>
+        <!-- Check Your Performance Banner (Replaces old stat row) -->
+        <div class="check-performance-card tappable" onclick="window.appShowScreen('attendance')" id="btnCheckPerformance">
+          <div class="perf-card-left">
+            <div class="perf-icon-badge">
+              <svg class="i perf-icon-svg" width="20" height="20" viewBox="0 0 24 24">
+                <path d="M18 20V10M12 20V4M6 20v-6" />
+              </svg>
+            </div>
+            <div class="perf-text-block">
+              <div class="perf-title-row">
+                <span class="perf-title">Check Your Performance</span>
+                <span class="perf-live-dot"></span>
+              </div>
+              <span class="perf-subtitle">Attendance, CGPA &amp; Academic Insights</span>
             </div>
           </div>
-          <div class="profile-stat-box" style="cursor: pointer;" onclick="window.appOpenModal('resultsModal')">
-            <div class="profile-stat-val">8.65</div>
-            <div class="profile-stat-lbl">CGPA (Sem V)</div>
-            <div style="font-size: 10px; color: var(--olive); font-weight: 600; margin-top: 2px;">Grade A+</div>
-          </div>
-          <div class="profile-stat-box">
-            <div class="profile-stat-val">124</div>
-            <div class="profile-stat-lbl">Earned Credits</div>
-            <div style="font-size: 10px; color: var(--muted); margin-top: 2px;">of 160 total</div>
+          <div class="perf-action-pill">
+            <span class="perf-pill-text">View</span>
+            <svg class="i perf-arrow-svg" width="14" height="14" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
           </div>
         </div>
       </div>
