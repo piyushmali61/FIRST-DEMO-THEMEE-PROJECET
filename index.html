@@ -128,6 +128,13 @@
         </div>
       </div>
 
+      <!-- Download APK Button (as in user screenshot) -->
+      <a href="ssbt-college-app.apk" download="ssbt-college-app.apk" class="icon-btn tappable" id="headerDownloadBtn" aria-label="Download APK">
+        <svg class="i" width="20" height="20" viewBox="0 0 24 24">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+        </svg>
+      </a>
+
       <!-- Theme Toggle Button -->
       <button class="icon-btn tappable" id="headerThemeBtn" aria-label="Toggle theme picker">
         <svg class="i" width="20" height="20" viewBox="0 0 24 24">
@@ -589,7 +596,46 @@
     </div>
 
     <!-- =======================================================================
-         VIEW 3: OTHER TABS CONTAINER (Courses, Events, Calendar)
+         VIEW 3: ACADEMIC CALENDAR SCREEN (Matched with user screenshot)
+         ======================================================================= -->
+    <div class="calendar-screen-view" id="calendarScreenView">
+      <div class="calendar-scroll-content">
+        
+        <!-- Header row: Title & Term Badge -->
+        <div class="calendar-title-row">
+          <h1 class="calendar-title">Academic Calendar</h1>
+          <span class="calendar-term-badge">TERM 2026-27</span>
+        </div>
+
+        <!-- Calendar Month Card -->
+        <div class="ssbt-card cal-card">
+          <div class="cal-card-header">
+            <span class="cal-month-title" id="calMonthTitle">October 2026</span>
+            <span class="cal-sem-label">Odd Semester</span>
+          </div>
+
+          <div class="cal-weekdays-row">
+            <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+          </div>
+
+          <!-- 7-column day grid (Rendered by app.js from Excel Master Dataset) -->
+          <div class="cal-days-grid" id="calDaysGrid">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+
+        <!-- Events List Card (Appears & focuses below the calendar) -->
+        <div class="ssbt-card cal-events-card" id="calEventsCard">
+          <div id="calEventsListContainer">
+            <!-- Dynamically populated by app.js -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         VIEW 4: OTHER TABS CONTAINER (Courses, Events)
          ======================================================================= -->
     <div class="tab-view-container" id="otherTabsContainer">
       <div style="display: flex; align-items: center; justify-content: space-between;">

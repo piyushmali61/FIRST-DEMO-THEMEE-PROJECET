@@ -319,6 +319,7 @@
   function showScreen(screenId) {
     const homeView = document.getElementById("homeScreenView");
     const attendanceView = document.getElementById("attendanceScreenView");
+    const calendarView = document.getElementById("calendarScreenView");
     const otherTabsContainer = document.getElementById("otherTabsContainer");
 
     // Close any open drawer or slider
@@ -327,6 +328,7 @@
 
     if (screenId === "attendance") {
       if (homeView) homeView.style.display = "none";
+      if (calendarView) calendarView.classList.remove("active");
       if (otherTabsContainer) otherTabsContainer.classList.remove("active");
       if (attendanceView) {
         attendanceView.classList.add("active");
@@ -334,10 +336,13 @@
       }
       window.location.hash = "attendance";
       updateNavIndicator(null); // not one of bottom 5
+    } else if (screenId === "calendar") {
+      switchTab("calendar");
     } else {
       if (attendanceView) attendanceView.classList.remove("active");
-      if (homeView) homeView.style.display = "flex";
+      if (calendarView) calendarView.classList.remove("active");
       if (otherTabsContainer) otherTabsContainer.classList.remove("active");
+      if (homeView) homeView.style.display = "flex";
       window.location.hash = "home";
       updateNavIndicator("home");
     }
@@ -346,19 +351,31 @@
   function switchTab(tabKey) {
     const homeView = document.getElementById("homeScreenView");
     const attendanceView = document.getElementById("attendanceScreenView");
+    const calendarView = document.getElementById("calendarScreenView");
     const otherTabs = document.getElementById("otherTabsContainer");
     const tabTitle = document.getElementById("otherTabTitle");
     const tabBody = document.getElementById("otherTabBody");
 
     if (attendanceView) attendanceView.classList.remove("active");
+    if (calendarView) calendarView.classList.remove("active");
 
     if (tabKey === "home") {
       if (homeView) homeView.style.display = "flex";
       if (otherTabs) otherTabs.classList.remove("active");
+      window.location.hash = "home";
     } else if (tabKey === "profile") {
       // Direct shortcut to Attendance / Student Profile
       showScreen("attendance");
       return;
+    } else if (tabKey === "calendar") {
+      if (homeView) homeView.style.display = "none";
+      if (otherTabs) otherTabs.classList.remove("active");
+      if (calendarView) {
+        calendarView.classList.add("active");
+        calendarView.scrollTop = 0;
+        renderAcademicCalendar();
+      }
+      window.location.hash = "calendar";
     } else {
       if (homeView) homeView.style.display = "none";
       if (otherTabs) {
@@ -647,7 +664,252 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 9. Event Listeners Initialization
+  // 9. Academic Calendar Excel Data & Interactive Engine
+  // (Excel Master Sheet Data structure with date, day, month, type, tag, title, desc)
+  // ---------------------------------------------------------------------------
+  const academicCalendarExcelData = [
+    {
+      date: "2026-10-15",
+      day: 15,
+      month: 10,
+      monthStr: "Oct",
+      year: 2026,
+      weekday: "Thursday",
+      tag: "Today",
+      type: "submission",
+      title: "Mid-Term CA Submissions",
+      desc: "Continuous assessment portal closes 11:59 PM",
+      isToday: true,
+      hasEvent: true
+    },
+    {
+      date: "2026-10-22",
+      day: 22,
+      month: 10,
+      monthStr: "Oct",
+      year: 2026,
+      weekday: "Thursday",
+      tag: "Event",
+      type: "event",
+      title: "Technical Symposium Day 1",
+      desc: "Robotics, Coding & Project Expo",
+      hasEvent: true
+    },
+    {
+      date: "2026-10-28",
+      day: 28,
+      month: 10,
+      monthStr: "Oct",
+      year: 2026,
+      weekday: "Wednesday",
+      tag: "Exams",
+      type: "exam",
+      title: "Mid-Sem Exams Start",
+      desc: "Theory papers commence",
+      hasEvent: true
+    },
+    {
+      date: "2026-10-29",
+      day: 29,
+      month: 10,
+      monthStr: "Oct",
+      year: 2026,
+      weekday: "Thursday",
+      tag: "Exams",
+      type: "exam",
+      title: "Mid-Sem Exams Day 2",
+      desc: "Compiler Design & AI Theory Papers",
+      hasEvent: true
+    },
+    {
+      date: "2026-10-30",
+      day: 30,
+      month: 10,
+      monthStr: "Oct",
+      year: 2026,
+      weekday: "Friday",
+      tag: "Exams",
+      type: "exam",
+      title: "Mid-Sem Exams Day 3",
+      desc: "Software Engineering & Cloud Computing",
+      hasEvent: true
+    },
+    {
+      date: "2026-10-31",
+      day: 31,
+      month: 10,
+      monthStr: "Oct",
+      year: 2026,
+      weekday: "Saturday",
+      tag: "Exams",
+      type: "exam",
+      title: "Mid-Sem Exams Day 4",
+      desc: "Cyber Security & Elective Modules",
+      hasEvent: true
+    },
+    {
+      date: "2026-11-12",
+      day: 12,
+      month: 11,
+      monthStr: "Nov",
+      year: 2026,
+      weekday: "Thursday",
+      tag: "Break",
+      type: "break",
+      title: "Diwali Vacation Starts",
+      desc: "Classes resume on Nov 18",
+      hasEvent: true
+    }
+  ];
+
+  let selectedCalDay = 15; // Defaults to 15 (Today) exactly as in screenshot
+  const calCurrentMonth = 10;
+  const calCurrentYear = 2026;
+
+  function renderAcademicCalendar() {
+    const grid = document.getElementById("calDaysGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+
+    // October 2026 starts on Thursday -> 4 empty cells (Su, Mo, Tu, We)
+    const firstDayOffset = 4;
+    const totalDays = 31;
+
+    for (let i = 0; i < firstDayOffset; i++) {
+      const emptyCell = document.createElement("div");
+      emptyCell.className = "cal-day-cell empty";
+      grid.appendChild(emptyCell);
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+      const cell = document.createElement("div");
+      cell.className = "cal-day-cell";
+      cell.textContent = day;
+
+      const eventsOnDay = academicCalendarExcelData.filter(e => e.year === calCurrentYear && e.month === calCurrentMonth && e.day === day);
+      const isExam = eventsOnDay.some(e => e.type === "exam");
+      const isOtherEvent = eventsOnDay.some(e => e.type !== "exam");
+
+      if (isExam) {
+        cell.classList.add("has-exam");
+      } else if (isOtherEvent) {
+        cell.classList.add("has-event");
+      }
+
+      if (day === selectedCalDay) {
+        cell.classList.add("selected");
+      }
+
+      cell.addEventListener("click", () => {
+        handleCalDayClick(day, eventsOnDay);
+      });
+
+      grid.appendChild(cell);
+    }
+
+    renderCalendarEventsList();
+  }
+
+  function handleCalDayClick(day, eventsOnDay) {
+    selectedCalDay = day;
+
+    const allCells = document.querySelectorAll(".cal-day-cell:not(.empty)");
+    allCells.forEach(c => {
+      if (parseInt(c.textContent, 10) === day) {
+        c.classList.add("selected");
+      } else {
+        c.classList.remove("selected");
+      }
+    });
+
+    renderCalendarEventsList(day, eventsOnDay);
+  }
+
+  function renderCalendarEventsList(selectedDayOverride, specificEvents) {
+    const container = document.getElementById("calEventsListContainer");
+    const card = document.getElementById("calEventsCard");
+    if (!container) return;
+
+    if (card) {
+      card.classList.remove("animating");
+      void card.offsetWidth;
+      card.classList.add("animating");
+    }
+
+    const day = selectedDayOverride !== undefined ? selectedDayOverride : selectedCalDay;
+    const eventsForDay = specificEvents || academicCalendarExcelData.filter(e => e.year === calCurrentYear && e.month === calCurrentMonth && e.day === day);
+
+    // Standard baseline term milestones (matching the 4 key rows in the user screenshot)
+    const termKeyEvents = [
+      academicCalendarExcelData.find(e => e.day === 15 && e.month === 10),
+      academicCalendarExcelData.find(e => e.day === 22 && e.month === 10),
+      academicCalendarExcelData.find(e => e.day === 28 && e.month === 10),
+      academicCalendarExcelData.find(e => e.day === 12 && e.month === 11)
+    ].filter(Boolean);
+
+    let displayList = [];
+
+    if (eventsForDay && eventsForDay.length > 0) {
+      displayList = [...eventsForDay];
+      termKeyEvents.forEach(item => {
+        if (!displayList.some(e => e.date === item.date)) {
+          displayList.push(item);
+        }
+      });
+    } else {
+      displayList = [
+        {
+          date: `2026-10-${day.toString().padStart(2, '0')}`,
+          day: day,
+          monthStr: "Oct",
+          tag: "Schedule",
+          type: "regular",
+          title: `Regular Academic Schedule (${day} Oct)`,
+          desc: "Theory lectures and lab batches conducted as per departmental timetable"
+        },
+        ...termKeyEvents
+      ];
+    }
+
+    let rowsHtml = "";
+    displayList.forEach((ev, idx) => {
+      let barClass = "";
+      if (ev.type === "break") barClass = "break";
+      else if (ev.type === "exam") barClass = "exam";
+
+      const isCurrentSelected = ev.day === day && ev.monthStr === "Oct";
+
+      rowsHtml += `
+        ${idx > 0 ? '<div class="hairline"></div>' : ''}
+        <div class="cal-event-row" style="${isCurrentSelected ? 'background-color: var(--surface-2);' : ''}">
+          <div class="cal-event-date-col">
+            <span class="cal-event-date-val">${ev.day} ${ev.monthStr}</span>
+            <span class="cal-event-date-tag" style="${ev.tag === 'Today' ? 'color: var(--accent); font-weight: 600;' : ''}">${ev.tag}</span>
+          </div>
+          <div class="cal-event-bar ${barClass}"></div>
+          <div class="cal-event-info-col">
+            <div class="cal-event-name">${ev.title}</div>
+            <div class="cal-event-desc">${ev.desc}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = rowsHtml;
+  }
+
+  // Support dynamic detection from Excel sheet data
+  function loadAcademicCalendarFromExcel(excelRows) {
+    if (Array.isArray(excelRows) && excelRows.length > 0) {
+      academicCalendarExcelData.length = 0;
+      excelRows.forEach(row => academicCalendarExcelData.push(row));
+      renderAcademicCalendar();
+    }
+  }
+  window.loadAcademicCalendarFromExcel = loadAcademicCalendarFromExcel;
+
+  // ---------------------------------------------------------------------------
+  // 10. Event Listeners Initialization
   // ---------------------------------------------------------------------------
   document.addEventListener("DOMContentLoaded", () => {
     updateGreetings();
@@ -787,12 +1049,15 @@
       });
     }
 
-    // Render initial attendance cards
+    // Render initial attendance cards & calendar
     renderAttendanceCards();
+    renderAcademicCalendar();
 
-    // Check URL hash for direct links (e.g. #attendance)
+    // Check URL hash for direct links (e.g. #attendance, #calendar)
     if (window.location.hash === "#attendance") {
       showScreen("attendance");
+    } else if (window.location.hash === "#calendar") {
+      switchTab("calendar");
     }
   });
 
