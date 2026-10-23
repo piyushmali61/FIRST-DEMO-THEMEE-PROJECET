@@ -2346,6 +2346,7 @@ body.wide-mode .device-frame {
 .cal-day-cell {
   aspect-ratio: 1 / 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 13px;
@@ -2357,6 +2358,9 @@ body.wide-mode .device-frame {
   transition: background-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.15s var(--ease), box-shadow 0.2s;
   position: relative;
 }
+.cal-day-num {
+  line-height: 1;
+}
 .cal-day-cell.empty {
   cursor: default;
   pointer-events: none;
@@ -2365,16 +2369,41 @@ body.wide-mode .device-frame {
   background-color: var(--surface-2);
 }
 
-/* Days with events/exams look different: soft tinted pill/square */
-.cal-day-cell.has-event {
-  background-color: var(--pill-bg);
-  color: var(--pill-fg);
-  font-weight: 700;
+/* Event indicator dot on dates */
+.cal-event-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.cal-day-cell.has-exam {
-  background-color: var(--pill-bg);
-  color: var(--pill-fg);
-  font-weight: 700;
+
+/* Dot Color Specifications: Blue (Exam), Red (Event Day), Green (Other) */
+.cal-event-dot.dot-blue,
+.cal-legend-dot.dot-blue {
+  background-color: #2563EB;
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.55);
+}
+.cal-event-dot.dot-red,
+.cal-legend-dot.dot-red {
+  background-color: #EF4444;
+  box-shadow: 0 0 5px rgba(239, 68, 68, 0.55);
+}
+.cal-event-dot.dot-green,
+.cal-legend-dot.dot-green {
+  background-color: #16A34A;
+  box-shadow: 0 0 5px rgba(22, 163, 74, 0.55);
+}
+
+.cal-day-cell.has-event-dot:not(.selected) {
+  font-weight: 600;
+}
+.cal-day-cell.has-event-dot:not(.selected):hover .cal-event-dot {
+  transform: translateX(-50%) scale(1.3);
 }
 
 /* Selected Active Day: solid olive/accent with white text & pop */
@@ -2382,14 +2411,44 @@ body.wide-mode .device-frame {
   background-color: var(--accent) !important;
   color: var(--on-accent) !important;
   font-weight: 700 !important;
-  transform: scale(1.04);
+  transform: scale(1.05);
   box-shadow: 0 4px 14px rgba(116, 118, 47, 0.32);
 }
+.cal-day-cell.selected .cal-event-dot {
+  bottom: 5px;
+  box-shadow: 0 0 0 1.5px #FFFFFF;
+}
 
-/* Events List Card */
+/* Calendar Legend Row */
+.cal-legend-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  font-size: 11.5px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.cal-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cal-legend-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Events List Card (Displayed only when pressing a day with an event) */
 .cal-events-card {
   padding: 0;
   overflow: hidden;
+  margin-top: 16px;
   transition: all 0.3s var(--ease);
 }
 .cal-event-row {
@@ -2403,7 +2462,7 @@ body.wide-mode .device-frame {
   background-color: var(--surface-2);
 }
 .cal-event-date-col {
-  width: 58px;
+  width: 72px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -2415,24 +2474,56 @@ body.wide-mode .device-frame {
   line-height: 17px;
 }
 .cal-event-date-tag {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
+  font-size: 10.5px;
+  margin-top: 4px;
+  display: inline-block;
+  font-weight: 600;
 }
+
+/* Tag pill colors */
+.tag-pill-blue {
+  color: #1D4ED8;
+  background-color: #EFF6FF;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 12px;
+  padding: 1px 7px;
+  width: fit-content;
+}
+.tag-pill-red {
+  color: #DC2626;
+  background-color: #FEF2F2;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 12px;
+  padding: 1px 7px;
+  width: fit-content;
+}
+.tag-pill-green {
+  color: #15803D;
+  background-color: #F0FDF4;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+  border-radius: 12px;
+  padding: 1px 7px;
+  width: fit-content;
+}
+
+/* Colored accent bar in event item */
 .cal-event-bar {
-  width: 3px;
-  height: 36px;
+  width: 3.5px;
+  height: 38px;
   border-radius: 2px;
-  background-color: var(--accent);
   margin: 0 14px;
   flex-shrink: 0;
 }
-.cal-event-bar.break {
-  background-color: var(--gold-accent);
+.cal-event-bar.bar-blue {
+  background-color: #2563EB;
 }
-.cal-event-bar.exam {
-  background-color: var(--flame-accent);
+.cal-event-bar.bar-red {
+  background-color: #EF4444;
 }
+.cal-event-bar.bar-green {
+  background-color: #16A34A;
+}
+
 .cal-event-info-col {
   flex: 1;
   min-width: 0;
@@ -2440,7 +2531,7 @@ body.wide-mode .device-frame {
   flex-direction: column;
 }
 .cal-event-name {
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 600;
   color: var(--ink);
   line-height: 18px;

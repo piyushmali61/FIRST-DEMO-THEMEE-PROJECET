@@ -675,63 +675,27 @@
       monthStr: "Oct",
       year: 2026,
       weekday: "Thursday",
-      tag: "Today",
-      type: "submission",
-      title: "Mid-Term CA Submissions",
-      desc: "Continuous assessment portal closes 11:59 PM",
-      isToday: true,
+      tag: "Calendar Day",
+      type: "other",
+      category: "other",
+      dotColor: "green",
+      title: "The Calendar Day",
+      desc: "Academic calendar day milestone, term orientation & departmental roadmap overview",
       hasEvent: true
     },
     {
-      date: "2026-10-22",
-      day: 22,
+      date: "2026-10-25",
+      day: 25,
       month: 10,
       monthStr: "Oct",
       year: 2026,
-      weekday: "Thursday",
-      tag: "Event",
+      weekday: "Sunday",
+      tag: "Event Day",
       type: "event",
-      title: "Technical Symposium Day 1",
-      desc: "Robotics, Coding & Project Expo",
-      hasEvent: true
-    },
-    {
-      date: "2026-10-28",
-      day: 28,
-      month: 10,
-      monthStr: "Oct",
-      year: 2026,
-      weekday: "Wednesday",
-      tag: "Exams",
-      type: "exam",
-      title: "Mid-Sem Exams Start",
-      desc: "Theory papers commence",
-      hasEvent: true
-    },
-    {
-      date: "2026-10-29",
-      day: 29,
-      month: 10,
-      monthStr: "Oct",
-      year: 2026,
-      weekday: "Thursday",
-      tag: "Exams",
-      type: "exam",
-      title: "Mid-Sem Exams Day 2",
-      desc: "Compiler Design & AI Theory Papers",
-      hasEvent: true
-    },
-    {
-      date: "2026-10-30",
-      day: 30,
-      month: 10,
-      monthStr: "Oct",
-      year: 2026,
-      weekday: "Friday",
-      tag: "Exams",
-      type: "exam",
-      title: "Mid-Sem Exams Day 3",
-      desc: "Software Engineering & Cloud Computing",
+      category: "event",
+      dotColor: "red",
+      title: "Sports Day",
+      desc: "Annual inter-department sports tournament, track & field events, and athletics",
       hasEvent: true
     },
     {
@@ -741,28 +705,17 @@
       monthStr: "Oct",
       year: 2026,
       weekday: "Saturday",
-      tag: "Exams",
+      tag: "ISE Exam",
       type: "exam",
-      title: "Mid-Sem Exams Day 4",
-      desc: "Cyber Security & Elective Modules",
-      hasEvent: true
-    },
-    {
-      date: "2026-11-12",
-      day: 12,
-      month: 11,
-      monthStr: "Nov",
-      year: 2026,
-      weekday: "Thursday",
-      tag: "Break",
-      type: "break",
-      title: "Diwali Vacation Starts",
-      desc: "Classes resume on Nov 18",
+      category: "exam",
+      dotColor: "blue",
+      title: "ISE Exam",
+      desc: "In-Semester Examination (ISE) theory assessment & evaluation papers",
       hasEvent: true
     }
   ];
 
-  let selectedCalDay = 15; // Defaults to 15 (Today) exactly as in screenshot
+  let selectedCalDay = 15; // Defaults to 15 (The Calendar Day)
   const calCurrentMonth = 10;
   const calCurrentYear = 2026;
 
@@ -784,16 +737,24 @@
     for (let day = 1; day <= totalDays; day++) {
       const cell = document.createElement("div");
       cell.className = "cal-day-cell";
-      cell.textContent = day;
+
+      const numSpan = document.createElement("span");
+      numSpan.className = "cal-day-num";
+      numSpan.textContent = day;
+      cell.appendChild(numSpan);
 
       const eventsOnDay = academicCalendarExcelData.filter(e => e.year === calCurrentYear && e.month === calCurrentMonth && e.day === day);
-      const isExam = eventsOnDay.some(e => e.type === "exam");
-      const isOtherEvent = eventsOnDay.some(e => e.type !== "exam");
 
-      if (isExam) {
-        cell.classList.add("has-exam");
-      } else if (isOtherEvent) {
-        cell.classList.add("has-event");
+      if (eventsOnDay.length > 0) {
+        cell.classList.add("has-event-dot");
+        const eventItem = eventsOnDay[0];
+        const dotColor = eventItem.dotColor || (eventItem.type === "exam" ? "blue" : (eventItem.type === "event" ? "red" : "green"));
+
+        const dotSpan = document.createElement("span");
+        dotSpan.className = `cal-event-dot dot-${dotColor}`;
+        dotSpan.setAttribute("title", eventItem.title);
+        cell.appendChild(dotSpan);
+        cell.setAttribute("data-has-event", "true");
       }
 
       if (day === selectedCalDay) {
@@ -815,7 +776,9 @@
 
     const allCells = document.querySelectorAll(".cal-day-cell:not(.empty)");
     allCells.forEach(c => {
-      if (parseInt(c.textContent, 10) === day) {
+      const numSpan = c.querySelector(".cal-day-num");
+      const dayVal = numSpan ? parseInt(numSpan.textContent, 10) : parseInt(c.textContent, 10);
+      if (dayVal === day) {
         c.classList.add("selected");
       } else {
         c.classList.remove("selected");
@@ -828,63 +791,36 @@
   function renderCalendarEventsList(selectedDayOverride, specificEvents) {
     const container = document.getElementById("calEventsListContainer");
     const card = document.getElementById("calEventsCard");
-    if (!container) return;
-
-    if (card) {
-      card.classList.remove("animating");
-      void card.offsetWidth;
-      card.classList.add("animating");
-    }
+    if (!container || !card) return;
 
     const day = selectedDayOverride !== undefined ? selectedDayOverride : selectedCalDay;
-    const eventsForDay = specificEvents || academicCalendarExcelData.filter(e => e.year === calCurrentYear && e.month === calCurrentMonth && e.day === day);
+    const eventsForDay = specificEvents !== undefined ? specificEvents : academicCalendarExcelData.filter(e => e.year === calCurrentYear && e.month === calCurrentMonth && e.day === day);
 
-    // Standard baseline term milestones (matching the 4 key rows in the user screenshot)
-    const termKeyEvents = [
-      academicCalendarExcelData.find(e => e.day === 15 && e.month === 10),
-      academicCalendarExcelData.find(e => e.day === 22 && e.month === 10),
-      academicCalendarExcelData.find(e => e.day === 28 && e.month === 10),
-      academicCalendarExcelData.find(e => e.day === 12 && e.month === 11)
-    ].filter(Boolean);
-
-    let displayList = [];
-
-    if (eventsForDay && eventsForDay.length > 0) {
-      displayList = [...eventsForDay];
-      termKeyEvents.forEach(item => {
-        if (!displayList.some(e => e.date === item.date)) {
-          displayList.push(item);
-        }
-      });
-    } else {
-      displayList = [
-        {
-          date: `2026-10-${day.toString().padStart(2, '0')}`,
-          day: day,
-          monthStr: "Oct",
-          tag: "Schedule",
-          type: "regular",
-          title: `Regular Academic Schedule (${day} Oct)`,
-          desc: "Theory lectures and lab batches conducted as per departmental timetable"
-        },
-        ...termKeyEvents
-      ];
+    // Only show event details on days that have an event or activity
+    if (!eventsForDay || eventsForDay.length === 0) {
+      card.style.display = "none";
+      container.innerHTML = "";
+      return;
     }
 
-    let rowsHtml = "";
-    displayList.forEach((ev, idx) => {
-      let barClass = "";
-      if (ev.type === "break") barClass = "break";
-      else if (ev.type === "exam") barClass = "exam";
+    // Show and animate event card
+    card.style.display = "block";
+    card.classList.remove("animating");
+    void card.offsetWidth;
+    card.classList.add("animating");
 
-      const isCurrentSelected = ev.day === day && ev.monthStr === "Oct";
+    let rowsHtml = "";
+    eventsForDay.forEach((ev, idx) => {
+      const dotColor = ev.dotColor || (ev.type === "exam" ? "blue" : (ev.type === "event" ? "red" : "green"));
+      const barClass = `bar-${dotColor}`;
+      const tagClass = `tag-pill-${dotColor}`;
 
       rowsHtml += `
         ${idx > 0 ? '<div class="hairline"></div>' : ''}
-        <div class="cal-event-row" style="${isCurrentSelected ? 'background-color: var(--surface-2);' : ''}">
+        <div class="cal-event-row">
           <div class="cal-event-date-col">
             <span class="cal-event-date-val">${ev.day} ${ev.monthStr}</span>
-            <span class="cal-event-date-tag" style="${ev.tag === 'Today' ? 'color: var(--accent); font-weight: 600;' : ''}">${ev.tag}</span>
+            <span class="cal-event-date-tag ${tagClass}">${ev.tag || (dotColor === 'blue' ? 'Exam' : (dotColor === 'red' ? 'Event' : 'Activity'))}</span>
           </div>
           <div class="cal-event-bar ${barClass}"></div>
           <div class="cal-event-info-col">
@@ -898,11 +834,38 @@
     container.innerHTML = rowsHtml;
   }
 
-  // Support dynamic detection from Excel sheet data
+  // Support dynamic detection from Excel sheet data with color categorization
+  function normalizeCalendarEvent(item) {
+    const rawType = ((item.type || item.category || "") + "").toLowerCase();
+    const rawTitle = ((item.title || "") + "").toLowerCase();
+    const rawTag = ((item.tag || "") + "").toLowerCase();
+
+    let dotColor = "green";
+    let category = "other";
+
+    if (rawType.includes("exam") || rawTitle.includes("exam") || rawTitle.includes("ise") || rawTag.includes("exam")) {
+      dotColor = "blue";
+      category = "exam";
+    } else if (rawType.includes("event") || rawTitle.includes("sports") || rawTitle.includes("event") || rawTitle.includes("fest") || rawTag.includes("event")) {
+      dotColor = "red";
+      category = "event";
+    } else {
+      dotColor = "green";
+      category = "other";
+    }
+
+    return {
+      ...item,
+      dotColor: item.dotColor || dotColor,
+      category: item.category || category,
+      hasEvent: true
+    };
+  }
+
   function loadAcademicCalendarFromExcel(excelRows) {
     if (Array.isArray(excelRows) && excelRows.length > 0) {
       academicCalendarExcelData.length = 0;
-      excelRows.forEach(row => academicCalendarExcelData.push(row));
+      excelRows.forEach(row => academicCalendarExcelData.push(normalizeCalendarEvent(row)));
       renderAcademicCalendar();
     }
   }
