@@ -338,6 +338,8 @@
       updateNavIndicator(null); // not one of bottom 5
     } else if (screenId === "calendar") {
       switchTab("calendar");
+    } else if (screenId === "profile") {
+      switchTab("profile");
     } else {
       if (attendanceView) attendanceView.classList.remove("active");
       if (calendarView) calendarView.classList.remove("active");
@@ -363,10 +365,6 @@
       if (homeView) homeView.style.display = "flex";
       if (otherTabs) otherTabs.classList.remove("active");
       window.location.hash = "home";
-    } else if (tabKey === "profile") {
-      // Direct shortcut to Attendance / Student Profile
-      showScreen("attendance");
-      return;
     } else if (tabKey === "calendar") {
       if (homeView) homeView.style.display = "none";
       if (otherTabs) otherTabs.classList.remove("active");
@@ -382,6 +380,7 @@
         otherTabs.classList.add("active");
         renderTabContent(tabKey, tabTitle, tabBody);
       }
+      window.location.hash = tabKey;
     }
     updateNavIndicator(tabKey);
   }
@@ -514,6 +513,98 @@
               </div>
               <span class="pill-badge">Scheduled</span>
             </div>
+          </div>
+        </div>
+      `;
+    } else if (tabKey === "profile") {
+      titleElem.textContent = "Student Profile";
+      bodyElem.innerHTML = `
+        <div class="ssbt-card" style="padding: 22px 18px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 58px; height: 58px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-family: var(--font-head); font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 14px rgba(0,0,0,0.12);">
+              PM
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-family: var(--font-head); font-size: 18px; font-weight: 700; color: var(--ink);">Piyush Mali</div>
+              <div style="font-size: 12.5px; color: var(--muted); margin-top: 2px;">PRN: 2023015400123456 · Roll: 21</div>
+              <div style="display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; padding: 2px 8px; border-radius: 12px; background: rgba(34, 197, 94, 0.12); color: #16A34A; font-size: 11px; font-weight: 600;">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E;"></span>
+                Active Student
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ssbt-card" style="padding: 18px; margin-bottom: 14px;">
+          <div class="eyebrow" style="margin-bottom: 8px;">ACADEMIC REGISTRATION</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Programme</span>
+              <span style="font-weight: 600; color: var(--ink); text-align: right;">B.Tech Computer Engineering</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Class & Year</span>
+              <span style="font-weight: 600; color: var(--ink);">Third Year (T.Y. Sem VI)</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Academic Year</span>
+              <span style="font-weight: 600; color: var(--ink);">2026-27 (Even Term)</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">College / Institute</span>
+              <span style="font-weight: 600; color: var(--ink); text-align: right; max-width: 60%;">SSBT's COET, Bambhori, Jalgaon</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Faculty Mentor</span>
+              <span style="font-weight: 600; color: var(--accent);">Dr. K. P. Adhiya</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ssbt-card" style="padding: 18px; margin-bottom: 14px;">
+          <div class="eyebrow" style="margin-bottom: 8px;">CONTACT & STUDENT CREDENTIALS</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">College Email</span>
+              <span style="font-weight: 600; color: var(--ink); word-break: break-all;">piyush.mali@sscoetjalgaon.ac.in</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Mobile Number</span>
+              <span style="font-weight: 600; color: var(--ink);">+91 98765 43210</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Admission Quota</span>
+              <span style="font-weight: 600; color: var(--ink);">CAP Round (Open)</span>
+            </div>
+            <div class="hairline"></div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; font-size: 13px;">
+              <span style="color: var(--muted);">Blood Group</span>
+              <span style="font-weight: 600; color: var(--ink);">O+</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ssbt-card" style="padding: 16px;">
+          <div class="eyebrow" style="margin-bottom: 10px;">QUICK PROFILE SHORTCUTS</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <button class="desktop-control-btn" onclick="window.appShowScreen('attendance')" style="width: 100%; justify-content: space-between; padding: 12px 14px;">
+              <span>📊 View Full Attendance Register</span>
+              <span>→</span>
+            </button>
+            <button class="desktop-control-btn" onclick="window.appOpenModal('resultsModal')" style="width: 100%; justify-content: space-between; padding: 12px 14px;">
+              <span>🎓 Examination Results & CGPA</span>
+              <span>→</span>
+            </button>
+            <button class="desktop-control-btn" onclick="window.appOpenModal('notesModal')" style="width: 100%; justify-content: space-between; padding: 12px 14px;">
+              <span>📁 Study Material & Notes</span>
+              <span>→</span>
+            </button>
           </div>
         </div>
       `;
